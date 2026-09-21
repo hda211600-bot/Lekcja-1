@@ -1,181 +1,294 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sieć społeczna - Technix-Pro!</title>
+    <title>Sieć społeczna - Technix-Pro</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
-<body class="bg-black text-white font-sans flex justify-center items-center screen h-screen">
 
-    <div class="w-full max-w-md h-[850px] bg-black rounded-3xl overflow-hidden relative flex flex-col border border-gray-800 shadow-2xl select-none">
+<body class="bg-black text-white font-sans flex flex-col h-[100dvh] overflow-hidden relative">
+
+    <!-- Górny nagłówek -->
+    <div class="flex items-center justify-between px-4 py-3 bg-black border-b border-gray-800 flex-shrink-0 z-10">
+        <div class="flex items-center space-x-3">
+            <button onclick="switchMainTab('profile')" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white cursor-pointer">
+                <i class="fa-solid fa-user"></i>
+            </button>
+            <span id="header-title" class="text-lg font-semibold">Sieć społeczna</span>
+        </div>
+        <div class="flex items-center space-x-4 text-lg">
+            <button onclick="switchMainTab('search')" class="cursor-pointer text-gray-400 hover:text-purple-400">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <button onclick="switchMainTab('notifications')" class="cursor-pointer text-gray-400 hover:text-purple-400">
+                <i class="fa-solid fa-bell"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Górne podzakładki dla DOMU (Kanał, Grupa, Info) -->
+    <div id="subtabs-home" class="subtabs-group flex justify-around border-b border-gray-800 text-sm font-medium flex-shrink-0 bg-black z-10">
+        <button onclick="switchSubTab('home', 'kanal')" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-purple-500 text-purple-500">Kanał</button>
+        <button onclick="switchSubTab('home', 'grupa')" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Grupa</button>
+        <button onclick="switchSubTab('home', 'info')" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Info</button>
+    </div>
+
+    <!-- Górne podzakładki dla PREZENTU (Promocje, Nagrody, Zadania) -->
+    <div id="subtabs-gift" class="subtabs-group hidden flex justify-around border-b border-gray-800 text-sm font-medium flex-shrink-0 bg-black z-10">
+        <button onclick="switchSubTab('gift', 'promocje')" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-purple-500 text-purple-500">Promocje</button>
+        <button onclick="switchSubTab('gift', 'nagrody')" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Nagrody</button>
+        <button onclick="switchSubTab('gift', 'zadania')" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Zadania</button>
+    </div>
+
+    <!-- Zawartość główna -->
+    <div id="tab-content" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 pb-20">
         
-        <!-- Górny nagłówek -->
-        <div class="flex items-center justify-between px-4 py-3 bg-black z-20 border-b border-gray-900">
-            <div class="flex items-center space-x-2">
-                <div onclick="openProfile()" class="w-8 h-8 rounded-full bg-purple-900 flex items-center justify-center text-purple-300 font-bold text-sm cursor-pointer hover:ring-2 transition">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <span class="text-lg font-semibold tracking-wide">Sieć społeczna</span>
-            </div>
-            <div class="flex items-center space-x-4 text-lg">
-                <i class="fa-solid fa-magnifying-glass text-gray-300 cursor-pointer hover:text-purple-400 transition" ontouchend="openSearch()" title="Wyszukaj"></i>
-                <i class="fa-regular fa-bell text-gray-300 cursor-pointer hover:text-purple-400 transition" ontouchend="openNotifications()" title="Powiadomienia"></i>
-            </div>
-        </div>
-
-        <!-- Zakładki górne -->
-        <div id="tabs-container" class="flex justify-around border-b border-gray-900 text-gray-400 text-sm font-medium">
-            <span ontouchend="switchTab('kanal')" class="tab-btn pb-2 cursor-pointer border-b-2 border-purple-500 text-white select-none">Kanał</span>
-            <span ontouchend="switchTab('grupa')" class="tab-btn pb-2 cursor-pointer border-b-2 border-transparent select-none">Grupa</span>
-            <span ontouchend="switchTab('info')" class="tab-btn pb-2 cursor-pointer border-b-2 border-transparent select-none">Info</span>
-        </div>
-
-        <!-- Zawartość główna -->
-        <div class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 relative">
-            
+        <!-- SEKCJA: DOM (Sieć społeczna) -->
+        <div id="content-home" class="main-content space-y-4">
             <!-- ZAKŁADKA: KANAŁ -->
-            <div id="content-kanal" class="tab-content space-y-4">
-                <div class="bg-gradient-to-r from-purple-900 to-indigo-950 rounded-2xl p-4 border border-purple-900/50 shadow-purple-950/20 shadow-2xl">
-                    <div class="flex items-center justify-between text-xs">
-                        <div class="flex items-center space-x-2 bg-green-500/20 text-green-400 px-3 py-1 rounded-full animate-pulse">
-                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                            <strong class="font-medium">Status sieci: Online</strong>
-                        </div>
-                        <span class="text-gray-400">Aktualizacja v2.4</span>
+            <div id="subcontent-home-kanal" class="subcontent-home space-y-4">
+                <div class="flex items-center justify-between bg-gray-900 p-3 rounded-xl border border-gray-800">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                        <span class="text-sm">Status sieci: Online</span>
                     </div>
+                    <span class="text-xs text-gray-400">Aktualizacja v2.4</span>
                 </div>
 
-                <div class="bg-[#121212] rounded-2xl p-4 border border-gray-800">
-                    <div class="flex items-center space-x-3 mb-3">
-                        <i class="fa-solid fa-fa-square-poll-vertical text-xl text-purple-400"></i>
-                        <h4 class="font-bold text-sm">Ankieta Społeczności</h4>
-                    </div>
-                    <p class="text-xs text-gray-400 mb-3">Co chcesz zobaczyć w kolejnej aktualizacji?</p>
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-3">
+                    <h3 class="font-medium text-sm">Ankieta Społeczności</h3>
+                    <p class="text-xs text-gray-400">Co chcesz zobaczyć w kolejnej aktualizacji?</p>
+                    
                     <div class="space-y-2">
-                        <div class="bg-purple-950/40 border border-purple-500/50 rounded-xl p-3 flex justify-between items-center text-xs">
-                            <span>Więcej narzędzi AI Analysis</span>
-                            <span class="font-bold text-purple-400">54%</span>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                              <span>Więcej narzędzi AI Analysis</span>
+                              <span>54%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                              <div class="bg-purple-600 h-full" style="width: 54%"></div>
+                            </div>
                         </div>
-                        <div class="bg-gray-900/50 border border-gray-800 rounded-xl p-3 flex justify-between items-center text-xs">
-                            <span>Więcej funkcji społecznościowych</span>
-                            <span class="font-bold text-gray-400">46%</span>
+                        <div>
+                            <div class="flex justify-between text-xs mb-1">
+                              <span>Więcej funkcji społecznościowych</span>
+                              <span>46%</span>
+                            </div>
+                            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                              <div class="bg-purple-600 h-full" style="width: 46%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-[#121212] rounded-2xl p-4 border border-gray-800 space-y-3">
+                <div class="bg-gray-900 rounded-xl border border-gray-800 p-4 space-y-3">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center font-bold">T</div>
                         <div>
-                            <h5 class="font-bold text-sm">Technix-Pro!</h5>
+                            <h4 class="text-sm font-bold">Technix-Pro!</h4>
                             <span class="text-xs text-gray-400">Dzisiaj, 12:45</span>
                         </div>
                     </div>
-                    <p class="text-xs text-white">🚀 <strong>Rusza nowy etap rozwoju Technix-Pro!</strong> Dziękujemy, że jesteście z nami. Wprowadzamy nowe narzędzia analityczne oraz usprawniamy działanie całej platformy.</p>
-                    <div class="flex items-center space-x-6 text-gray-400 text-xs pt-2 border-t border-gray-800">
-                        <div class="flex items-center space-x-1 cursor-pointer hover:text-red-500">
+                    <p class="text-sm">🚀 Rusza nowy etap rozwoju Technix-Pro! Dziękujemy, że jesteście z nami. Wprowadzamy nowe narzędzia analityczne oraz usprawniamy działanie całej platformy.</p>
+                    <div class="flex items-center space-x-6 text-gray-400 text-sm pt-2 border-t border-gray-800">
+                        <button onclick="toggleLike(this)" class="flex items-center space-x-1 cursor-pointer hover:text-purple-400 transition-colors">
                             <i class="fa-regular fa-heart"></i>
                             <span>142</span>
-                        </div>
-                        <div class="flex items-center space-x-1 cursor-pointer hover:text-blue-400">
+                        </button>
+                        <button onclick="switchMainTab('comments')" class="flex items-center space-x-1 cursor-pointer hover:text-purple-400 transition-colors">
                             <i class="fa-regular fa-comment"></i>
                             <span>98</span>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- ZAKŁADKA: GRUPA -->
-            <div id="content-grupa" class="tab-content space-y-4 hidden">
-                <div class="bg-[#121212] rounded-2xl p-4 border border-gray-800">
-                    <h4 class="font-bold text-sm mb-2 text-purple-400">Dyskusja w grupie</h4>
-                    <textarea placeholder="Napisz coś do grupy..." class="w-full bg-black border border-gray-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-600 resize-none h-20 mb-2"></textarea>
-                    <input type="file" id="device-gallery-input" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
-                    <div class="flex items-center justify-between">
-                        <div class="flex space-x-3 text-purple-400">
-                            <i class="fa-regular fa-image cursor-pointer" ontouchend="openPhoneGallery()"></i>
-                        </div>
-                        <button class="bg-purple-600 text-white text-xs px-4 py-2 rounded-xl font-medium">Opublikuj</button>
+            <div id="subcontent-home-grupa" class="subcontent-home space-y-4 hidden">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-3">
+                    <h3 class="font-bold text-sm">Dyskusja w grupie</h3>
+                    <textarea placeholder="Napisz coś do grupy..." class="w-full bg-gray-950 border border-gray-800 rounded-lg p-3 text-sm focus:outline-none focus:border-purple-500 resize-none h-20"></textarea>
+                    <div class="flex justify-between items-center">
+                        <button class="text-gray-400 hover:text-white cursor-pointer"><i class="fa-regular fa-image"></i></button>
+                        <button class="bg-purple-600 text-white text-xs px-4 py-2 rounded-lg font-medium cursor-pointer">Opublikuj</button>
                     </div>
                 </div>
             </div>
 
             <!-- ZAKŁADKA: INFO -->
-            <div id="content-info" class="tab-content space-y-4 hidden">
-                <div class="bg-[#121212] rounded-2xl p-4 border border-gray-800 text-center">
-                    <h4 class="font-bold text-purple-400 mb-1">NEW LOGO AND BRANDING UPDATE!</h4>
+            <div id="subcontent-home-info" class="subcontent-home space-y-4 hidden">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-2 text-center">
+                    <h3 class="font-bold text-purple-400 text-base">NEW LOGO AND BRANDING UPDATE!</h3>
                     <p class="text-xs text-gray-300">Wprowadzamy oficjalny TECHNIX-PRO w pełnym zakresie.</p>
                 </div>
             </div>
-
         </div>
 
-        <!-- Dolny pasek nawigacyjny -->
-        <div class="absolute bottom-0 left-0 right-0 h-16 bg-[#1a0b2e]/95 backdrop-blur-md border-t border-purple-500/50 flex items-center justify-around px-2 z-30">
-            <div class="flex flex-col items-center cursor-pointer text-purple-400" ontouchend="switchTab('kanal')">
-                <i class="fa-solid fa-house text-lg"></i>
-                <span class="text-[10px] mt-1">Kanał</span>
+        <!-- SEKCJA: PREZENT (Bonusy) -->
+        <div id="content-gift" class="main-content space-y-4 hidden">
+            <!-- ZAKŁADKA: PROMOCJE -->
+            <div id="subcontent-gift-promocje" class="subcontent-gift space-y-4">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center space-y-2">
+                    <h3 class="font-bold text-purple-400 text-base">Aktualne Promocje</h3>
+                    <p class="text-xs text-gray-300">Skorzystaj ze specjalnych ofert i zyskaj więcej!</p>
+                </div>
             </div>
-            <div class="flex flex-col items-center cursor-pointer text-gray-400 hover:text-purple-400" ontouchend="switchTab('grupa')">
-                <i class="fa-solid fa-users text-lg"></i>
-                <span class="text-[10px] mt-1">Grupa</span>
+
+            <!-- ZAKŁADKA: NAGRODY -->
+            <div id="subcontent-gift-nagrody" class="subcontent-gift space-y-4 hidden">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center space-y-2">
+                    <h3 class="font-bold text-purple-400 text-base">Twoje Nagrody</h3>
+                    <p class="text-xs text-gray-300">Odbierz swoje codzienne bonusy i skrzynki.</p>
+                </div>
             </div>
-            <div class="flex flex-col items-center cursor-pointer text-gray-400 hover:text-purple-400" ontouchend="switchTab('info')">
-                <i class="fa-solid fa-circle-info text-lg"></i>
-                <span class="text-[10px] mt-1">Info</span>
+
+            <!-- ZAKŁADKA: ZADANIA -->
+            <div id="subcontent-gift-zadania" class="subcontent-gift space-y-4 hidden">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center space-y-2">
+                    <h3 class="font-bold text-purple-400 text-base">Zadania codzienne</h3>
+                    <p class="text-xs text-gray-300">Wykonaj zadania, aby zdobyć dodatkowe punkty.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- POZOSTAŁE SEKCJE DOLNEGO PASKA -->
+        <div id="content-crypto" class="main-content space-y-4 hidden">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
+                <h3 class="font-bold text-purple-400 text-base mb-2">Kryptowaluty</h3>
+                <p class="text-xs text-gray-300">Panel rynkowy i kursy Bitcoin.</p>
+            </div>
+        </div>
+
+        <div id="content-wallet" class="main-content space-y-4 hidden">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
+                <h3 class="font-bold text-purple-400 text-base mb-2">Portfel i Waluty</h3>
+                <p class="text-xs text-gray-300">Stan Twojego konta oraz aktywa.</p>
+            </div>
+        </div>
+
+        <div id="content-menu" class="main-content space-y-4 hidden">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-2">
+                <h3 class="font-bold text-purple-400 text-base mb-2">Menu główne</h3>
+                <p class="text-xs text-gray-300">• Ustawienia konta</p>
+                <p class="text-xs text-gray-300">• Regulamin</p>
+                <p class="text-xs text-gray-300">• Pomoc i kontakt</p>
+            </div>
+        </div>
+
+        <!-- WIDOKI GÓRNE (PROFIL, SZUKAJ, POWIADOMIENIA, KOMENTARZE) -->
+        <div id="content-profile" class="main-content space-y-4 hidden">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
+                <h3 class="font-bold text-purple-400 text-base mb-2">Profil Użytkownika</h3>
+                <p class="text-xs text-gray-300">Zarządzaj swoimi danymi.</p>
+            </div>
+        </div>
+
+        <div id="content-search" class="main-content space-y-4 hidden">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-3">
+                <h3 class="font-bold text-sm">Wyszukiwarka</h3>
+                <input type="text" placeholder="Szukaj wpisów lub użytkowników..." class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-sm focus:outline-none focus:border-purple-500">
+            </div>
+        </div>
+
+        <div id="content-notifications" class="main-content space-y-4 hidden">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
+                <h3 class="font-bold text-purple-400 text-base mb-2">Powiadomienia</h3>
+                <p class="text-xs text-gray-300">Brak nowych powiadomień.</p>
+            </div>
+        </div>
+
+        <div id="content-comments" class="main-content space-y-4 hidden">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-3">
+                <h3 class="font-bold text-sm">Komentarze</h3>
+                <textarea placeholder="Napisz komentarz..." class="w-full bg-gray-950 border border-gray-800 rounded-lg p-3 text-sm focus:outline-none focus:border-purple-500 resize-none h-20"></textarea>
+                <button class="bg-purple-600 text-white text-xs px-4 py-2 rounded-lg font-medium cursor-pointer">Wyślij</button>
             </div>
         </div>
 
     </div>
 
-    <script>
-        function switchTab(tabName) {
-            // Ukryj wszystkie zawartości
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(el => el.classList.add('hidden'));
+    <!-- Dolny pasek nawigacyjny -->
+    <div class="fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center bg-gray-950 border-t border-gray-800 py-3">
+        <button onclick="switchMainTab('home', 'Sieć społeczna')" class="nav-btn text-purple-500 flex flex-col items-center cursor-pointer" data-target="home"><i class="fa-solid fa-house text-lg"></i></button>
+        <button onclick="switchMainTab('gift', 'Bonusy')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="gift"><i class="fa-solid fa-gift text-lg"></i></button>
+        <button onclick="switchMainTab('crypto', 'Kryptowaluty')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="crypto"><i class="fa-brands fa-bitcoin text-lg"></i></button>
+        <button onclick="switchMainTab('wallet', 'Portfel')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="wallet"><i class="fa-solid fa-wallet text-lg"></i></button>
+        <button onclick="switchMainTab('menu', 'Menu')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="menu"><i class="fa-solid fa-bars text-lg"></i></button>
+    </div>
 
-            // Pokaż wybraną zawartość
-            const targetContent = document.getElementById('content-' + tabName);
+    <script>
+        function switchMainTab(tabId, titleText) {
+            document.querySelectorAll('.main-content').forEach(el => el.classList.add('hidden'));
+            const targetContent = document.getElementById('content-' + tabId);
             if (targetContent) {
                 targetContent.classList.remove('hidden');
             }
 
-            // Zaktualizuj styl aktywnych przycisków górnych
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            tabButtons.forEach(btn => {
-                btn.classList.remove('border-purple-500', 'text-white');
+            // Zmiana tytułu w nagłówku
+            if (titleText) {
+                document.getElementById('header-title').textContent = titleText;
+            }
+
+            // Obsługa wyświetlania odpowiednich górnych podzakładek
+            document.querySelectorAll('.subtabs-group').forEach(el => el.classList.add('hidden'));
+            if (tabId === 'home') {
+                document.getElementById('subtabs-home').classList.remove('hidden');
+            } else if (tabId === 'gift') {
+                document.getElementById('subtabs-gift').classList.remove('hidden');
+            }
+
+            // Podświetlenie ikony na dolnym pasku
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-purple-500');
+                btn.classList.add('text-gray-400');
+                if (btn.getAttribute('data-target') === tabId) {
+                    btn.classList.remove('text-gray-400');
+                    btn.classList.add('text-purple-500');
+                }
+            });
+        }
+
+        function switchSubTab(mainGroup, subId) {
+            document.querySelectorAll('.subcontent-' + mainGroup).forEach(el => el.classList.add('hidden'));
+            document.getElementById('subcontent-' + mainGroup + '-' + subId).classList.remove('hidden');
+
+            document.querySelectorAll('.subtab-btn-' + mainGroup).forEach(btn => {
+                btn.classList.remove('border-purple-500', 'text-purple-500');
                 btn.classList.add('border-transparent', 'text-gray-400');
             });
-            
-            // Znajdź przycisk dla zakładki kanału/grupy/info i zaznacz go
-            event.currentTarget.classList.add('border-purple-500', 'text-white');
             event.currentTarget.classList.remove('border-transparent', 'text-gray-400');
+            event.currentTarget.classList.add('border-purple-500', 'text-purple-500');
         }
 
-        function openNotifications() {
-            alert("Brak nowych powiadomień.");
-        }
-
-        function openSearch() {
-            alert("Wyszukiwanie jest obecnie niedostępne.");
-        }
-
-        function openPhoneGallery() {
-            document.getElementById('device-gallery-input').click();
-        }
-
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (file) {
-                alert("Wybrano plik: " + file.name);
+        function toggleLike(btn) {
+            const icon = btn.querySelector('i');
+            const span = btn.querySelector('span');
+            let count = parseInt(span.textContent);
+            
+            if (icon.classList.contains('fa-regular')) {
+                icon.classList.remove('fa-regular', 'fa-heart');
+                icon.classList.add('fa-solid', 'fa-heart', 'text-purple-500');
+                span.textContent = count + 1;
+            } else {
+                icon.classList.remove('fa-solid', 'fa-heart', 'text-purple-500');
+                icon.classList.add('fa-regular', 'fa-heart');
+                span.textContent = count - 1;
             }
         }
     </script>
 </body>
+
 </html>
