@@ -3,165 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KuCoin Clone - Dashboard</title>
+    <title>Sieć społeczna - Technix-Pro</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        /* Ukrycie paska przewijania dla lepszego wyglądu aplikacji mobilnej */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-
-        body {
-            background-color: #121214;
-            color: #ffffff;
-            padding: 16px;
-        }
-
-        /* Header / Balance Card */
-        .balance-card {
-            background-color: #1a1b1e;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .balance-title {
-            color: #848e9c;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .balance-amount {
-            font-size: 32px;
-            font-weight: bold;
-        }
-
-        .balance-pnl {
-            color: #f6465d;
-            font-size: 14px;
-            margin-top: 6px;
-        }
-
-        .btn-deposit {
-            background-color: #ffffff;
-            color: #000000;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Grid Feature Cards */
-        .grid-menu {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .menu-item {
-            background-color: #1a1b1e;
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-            font-size: 12px;
-            color: #eaecef;
-        }
-
-        /* Markets Section */
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
-
-        .market-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .market-item {
-            background-color: #1a1b1e;
-            border-radius: 12px;
-            padding: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .market-name {
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .market-sub {
-            color: #848e9c;
-            font-size: 12px;
-        }
-
-        .price-badge {
-            background-color: #0ecb81;
-            color: #ffffff;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .price-badge.red {
-            background-color: #f6465d;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body>
+<body class="bg-black text-white font-sans flex justify-center items-center min-h-screen m-0">
 
-    <!-- Sekcja balansu -->
-    <div class="balance-card">
-        <div>
-            <div class="balance-title">Total Assets (USDT)</div>
-            <div class="balance-amount">2.67</div>
-            <div class="balance-pnl">Today's PnL -$150.45</div>
-        </div>
-        <button class="btn-deposit">Deposit</button>
-    </div>
+    <!-- Kontener symulujący ekran telefonu -->
+    <div class="w-full max-w-md h-[850px] bg-black rounded-3xl overflow-hidden relative flex flex-col border-4 border-gray-800 shadow-2xl">
 
-    <!-- Szybkie menu -->
-    <div class="grid-menu">
-        <div class="menu-item">Rewards Hub</div>
-        <div class="menu-item">KuLeague</div>
-        <div class="menu-item">KuMining</div>
-        <div class="menu-item">Events Hub</div>
-        <div class="menu-item">Futures Perks</div>
-        <div class="menu-item">Shark Fin</div>
-        <div class="menu-item">KCUSD</div>
-        <div class="menu-item">More</div>
-    </div>
-
-    <!-- Lista rynkowa -->
-    <div class="section-title">Rynek</div>
-    <div class="market-list">
-        <div class="market-item">
-            <div>
-                <div class="market-name">MHA</div>
-                <div class="market-sub">$0.054333</div>
+        <!-- Górny nagłówek -->
+        <div class="flex items-center justify-between px-4 py-3 bg-black z-10 border-b border-gray-900">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full bg-purple-900 flex items-center justify-center text-purple-300 font-bold text-xs">X</div>
+                <span class="text-lg font-semibold tracking-wide">Sieć społeczna</span>
             </div>
-            <div class="price-badge red">-0.15%</div>
-        </div>
-        <div class="market-item">
-            <div>
-                <div class="market-name">ON</div>
-                <div class="market-sub">$0.1723</div>
+            <div class="flex items-center space-x-4 text-lg">
+                <i class="fa-solid fa-magnifying-glass text-gray-300 cursor-pointer"></i>
+                <i class="fa-regular fa-bell text-gray-300 cursor-pointer"></i>
             </div>
-            <div class="price-badge">+5.49%</div>
         </div>
+
+        <!-- Zakładki nawigacyjne (Kanat, Grupa, Info) -->
+        <div class="flex justify-around py-2 border-b border-gray-900 text-sm text-gray-400 font-medium bg-black">
+            <span class="cursor-pointer hover:text-white">Kanał</span>
+            <span class="cursor-pointer hover:text-white">Grupa</span>
+            <span class="cursor-pointer text-white border-b-2 border-purple-500 pb-1">Info</span>
+        </div>
+
+        <!-- Główna sekcja z możliwością przewijania (Scrollowalny widok postów) -->
+        <div class="flex-1 overflow-y-auto no-scrollbar pb-24 px-4 pt-4 space-y-4">
+
+            <!-- Post 1: MrBrown -->
+            <div class="bg-[#121212] rounded-2xl p-4 border border-gray-800">
+                <!-- Profil autora -->
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces" alt="MrBrown" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-bold text-sm">MrBrown</h4>
+                            <p class="text-xs text-gray-400">Growth & Gains</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-ellipsis text-gray-400 cursor-pointer"></i>
+                </div>
+
+                <!-- Tekst posta -->
+                <div class="text-sm space-y-1 mb-3">
+                    <p class="font-bold text-purple-400">**[NEW LOGO AND BRANDING UPDATE]**</p>
+                    <p class="text-gray-300">Introducing the official:</p>
+                </div>
+
+                <!-- Grafika w poście -->
+                <div class="rounded-xl overflow-hidden border border-purple-900/50 mb-3 bg-purple-950/20 p-2 flex justify-center">
+                    <div class="text-center py-8">
+                        <i class="fa-solid fa-chart-line text-5xl text-purple-400 mb-2"></i>
+                        <h3 class="text-xl font-black tracking-widest text-purple-300">TECHNIX-PRO</h3>
+                    </div>
+                </div>
+
+                <!-- Ikony reakcji -->
+                <div class="flex items-center space-x-6 text-gray-400 text-sm">
+                    <div class="flex items-center space-x-1 cursor-pointer hover:text-red-500">
+                        <i class="fa-regular fa-heart"></i>
+                        <span>3,98 K</span>
+                    </div>
+                    <div class="flex items-center space-x-1 cursor-pointer hover:text-blue-400">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>206</span>
+                    </div>
+                    <div class="flex-1"></div>
+                    <i class="fa-solid fa-arrow-up-from-bracket cursor-pointer hover:text-white"></i>
+                    <i class="fa-solid fa-ellipsis cursor-pointer hover:text-white ml-2"></i>
+                </div>
+            </div>
+
+            <!-- Kafel AI Analysis -->
+            <div class="bg-[#121212] rounded-2xl p-4 border border-gray-800 flex items-center justify-between cursor-pointer hover:border-purple-600 transition">
+                <div>
+                    <h4 class="font-bold text-sm mb-1 text-white">AI Analysis</h4>
+                    <p class="text-xs text-gray-400">AI Analysis ie orarat the nearity in your portfolio, new channels from this related community.</p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-400 ml-3"></i>
+            </div>
+
+            <!-- Post 2 (dla demonstracji przewijania) -->
+            <div class="bg-[#121212] rounded-2xl p-4 border border-gray-800">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-green-900 flex items-center justify-center font-bold text-xs">G&G</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Growth & Gains</h4>
+                            <p class="text-xs text-gray-400">Growth & Gains</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-ellipsis text-gray-400 cursor-pointer"></i>
+                </div>
+                <p class="text-xs text-gray-300">Un-salty trend extreme track forcy the...</p>
+            </div>
+
+            <!-- Dodatkowy element pokazujący, że strona w pełni scrolluje -->
+            <div class="text-center py-4 text-xs text-gray-500">
+                Koniec postów – przewiń w górę, aby zobaczyć więcej.
+            </div>
+
+        </div>
+
+        <!-- Dolny pasek nawigacyjny (przyklejony na stałe) -->
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-purple-950/90 backdrop-blur-md border-t border-purple-900/50 flex items-center justify-around px-2 z-20 rounded-b-3xl">
+            <!-- Dom (aktywny) -->
+            <div class="bg-purple-900 p-2.5 rounded-2xl cursor-pointer shadow-lg shadow-purple-900/50">
+                <i class="fa-solid fa-house text-white text-lg"></i>
+            </div>
+            <!-- Prezent -->
+            <div class="p-2 cursor-pointer text-purple-300 hover:text-white">
+                <i class="fa-solid fa-gift text-lg"></i>
+            </div>
+            <!-- Bitcoin / Kłódka -->
+            <div class="p-2 cursor-pointer text-purple-300 hover:text-white">
+                <i class="fa-brands fa-bitcoin text-lg"></i>
+            </div>
+            <!-- Społeczność / Grupa -->
+            <div class="p-2 cursor-pointer text-purple-300 hover:text-white">
+                <i class="fa-solid fa-user-group text-lg"></i>
+            </div>
+            <!-- Menu / Hamburger -->
+            <div class="p-2 cursor-pointer text-purple-300 hover:text-white">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </div>
+        </div>
+
     </div>
 
 </body>
 </html>
-
