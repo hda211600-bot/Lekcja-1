@@ -403,6 +403,46 @@
                 span.innerText = count - 1;
             }
         }
+                // Funkcje dla sekcji Profilu
+        let tempSelectedAvatar = 'fa-user-astronaut';
+
+        function openAvatarModal() {
+            document.getElementById('avatar-modal').classList.remove('hidden');
+        }
+
+        function closeAvatarModal() {
+            document.getElementById('avatar-modal').classList.add('hidden');
+        }
+
+        function selectAvatar(iconClass) {
+            tempSelectedAvatar = iconClass;
+            const options = document.querySelectorAll('.avatar-option');
+            options.forEach(opt => {
+                opt.classList.remove('bg-purple-600', 'text-white', 'border-purple-500');
+                opt.classList.add('bg-gray-800', 'text-gray-300', 'border-gray-700');
+            });
+            event.currentTarget.classList.add('bg-purple-600', 'text-white', 'border-purple-500');
+            event.currentTarget.classList.remove('bg-gray-800', 'text-gray-300', 'border-gray-700');
+        }
+
+        function saveAvatar() {
+            const preview = document.getElementById('profile-avatar-preview');
+            preview.innerHTML = `<i class="fa-solid ${tempSelectedAvatar}"></i>`;
+            closeAvatarModal();
+        }
+
+        function editUsername() {
+            const currentName = document.getElementById('user-display-name').innerText;
+            const newName = prompt("Wpisz nową nazwę użytkownika:", currentName);
+            if (newName && newName.trim() !== "") {
+                document.getElementById('user-display-name').innerText = newName.trim();
+            }
+        }
+
+        function toggleThemePicker() {
+            alert("Funkcja edycji motywu kolorystycznego zostanie podłączona w kolejnym kroku!");
+        }
+        
     </script>
 </body>
                                                                                                                                                                    </html>
