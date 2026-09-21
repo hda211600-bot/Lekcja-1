@@ -4,28 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sieć społeczna - Technix-Pro</title>
-    <!-- Tailwind CSS CDN -->
-   <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-black text-white font-sans flex justify-center items-center min-h-screen m-0">
 
-    <!-- Kontener symulujący ekran telefonu -->
     <div class="w-full max-w-md h-[850px] bg-black rounded-3xl overflow-hidden relative flex flex-col border-4 border-gray-800 shadow-2xl">
 
-        <!-- Górny nagłówek -->
         <div class="flex items-center justify-between px-4 py-3 bg-black z-20 border-b border-gray-900">
             <div class="flex items-center space-x-2">
-                <!-- Lewy górny róg - awatar/logo otwierający profil -->
                 <div onclick="openProfile()" class="w-8 h-8 rounded-full bg-purple-900 flex items-center justify-center text-purple-300 font-bold text-xs cursor-pointer hover:ring-2 hover:ring-purple-500 transition" title="Profil użytkownika">X</div>
                 <span class="text-lg font-semibold tracking-wide">Sieć społeczna</span>
             </div>
@@ -35,17 +26,14 @@
             </div>
         </div>
 
-        <!-- Zakładki górne (Kanał, Grupa, Info) -->
         <div id="top-tabs-container" class="flex justify-around py-2 border-b border-gray-900 text-sm text-gray-400 font-medium bg-black z-20">
             <span onclick="switchTab('kanal')" id="tab-kanal" class="cursor-pointer text-white border-b-2 border-purple-500 pb-1 font-semibold transition">Kanał</span>
             <span onclick="switchTab('grupa')" id="tab-grupa" class="cursor-pointer text-gray-400 hover:text-white transition pb-1">Grupa</span>
             <span onclick="switchTab('info')" id="tab-info" class="cursor-pointer text-gray-400 hover:text-white transition pb-1">Info</span>
         </div>
 
-        <!-- Główna sekcja widoków -->
         <div class="flex-1 overflow-y-auto no-scrollbar pb-36 px-4 pt-4 space-y-4 relative">
 
-            <!-- ZAKŁADKA: KANAŁ -->
             <div id="content-kanal" class="tab-content space-y-4">
                 <div class="bg-gradient-to-r from-purple-950 to-indigo-950 rounded-2xl p-3 border border-purple-900/50 flex items-center justify-between text-xs">
                     <div class="flex items-center space-x-2">
@@ -96,14 +84,11 @@
                 </div>
             </div>
 
-            <!-- ZAKŁADKA: GRUPA -->
             <div id="content-grupa" class="tab-content space-y-4 hidden">
                 <div class="bg-[#121212] rounded-2xl p-4 border border-purple-900/40">
                     <h4 class="font-bold text-sm mb-2 text-purple-300"><i class="fa-solid fa-pen-to-square mr-1"></i> Dodaj post w grupie</h4>
                     <textarea placeholder="Napisz coś do grupy..." class="w-full bg-black border border-gray-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-600 resize-none h-20 mb-2"></textarea>
-                    
                     <input type="file" id="device-gallery-input" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
-
                     <div class="flex items-center justify-between">
                         <div class="flex space-x-3 text-purple-400 text-lg">
                             <i class="fa-regular fa-image cursor-pointer hover:text-white" title="Dodaj zdjęcie z galerii" onclick="openPhoneGallery()"></i>
@@ -126,7 +111,6 @@
                         <i class="fa-solid fa-ellipsis text-gray-400 cursor-pointer"></i>
                     </div>
                     <p class="text-xs text-gray-300 mb-3">Cześć wszystkim! Co sądzicie o nowym ogłoszeniu na kanale?</p>
-                    
                     <div class="flex items-center space-x-6 text-gray-400 text-sm border-t border-gray-900 pt-3">
                         <div class="flex items-center space-x-1 cursor-pointer text-red-500 hover:text-red-400">
                             <i class="fa-solid fa-heart"></i>
@@ -158,7 +142,6 @@
                 </div>
             </div>
 
-            <!-- ZAKŁADKA: INFO -->
             <div id="content-info" class="tab-content space-y-4 hidden">
                 <div class="bg-[#121212] rounded-2xl p-4 border border-gray-800">
                     <div class="flex items-center justify-between mb-3">
@@ -169,7 +152,7 @@
                                 <p class="text-xs text-gray-400">Growth & Gains (Twoje Posty)</p>
                             </div>
                         </div>
-                        <i class="fa-solid fa-ellipsis text-gray-400 cursor-pointer" title="Zapisz pod 3 kropek"></i>
+                        <i class="fa-solid fa-ellipsis text-gray-400 cursor-pointer"></i>
                     </div>
 
                     <div class="text-sm space-y-1 mb-3">
@@ -200,7 +183,6 @@
                 </div>
             </div>
 
-            <!-- WIDOK: PROFIL UŻYTKOWNIKA -->
             <div id="content-profil" class="tab-content space-y-4 hidden">
                 <div class="flex items-center justify-between mb-2">
                     <h3 class="font-bold text-sm text-white">Profil użytkownika</h3>
@@ -244,7 +226,6 @@
                 </div>
             </div>
 
-            <!-- WIDOK: PEŁNY POST I KOMENTARZE -->
             <div id="content-post-detail" class="tab-content space-y-4 hidden">
                 <button onclick="switchTab('info')" class="text-xs text-purple-400 hover:underline flex items-center space-x-1 mb-2">
                     <i class="fa-solid fa-arrow-left"></i> <span>Wróć</span>
@@ -295,4 +276,13 @@
 
                     <div class="flex items-center space-x-2 mt-4 pt-3 border-t border-gray-900">
                         <input type="text" placeholder="Napisz komentarz..." class="w-full bg-black border border-gray-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-600">
-                        <button class="bg-purple-900
+                        <button class="bg-purple-900 hover:bg-purple-800 text-white px-4 py-2 rounded-xl text-xs font-bold transition">Wyślij</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-wyszukiwarka" class="tab-content space-y-4 hidden">
+                <div class="flex items-center space-x-2 mb-2">
+                    <div class="relative flex-1">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
+               
