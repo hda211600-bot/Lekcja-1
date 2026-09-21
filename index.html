@@ -24,16 +24,16 @@
     <!-- Górny nagłówek -->
     <div class="flex items-center justify-between px-4 py-3 bg-black border-b border-gray-800 flex-shrink-0 z-10">
         <div class="flex items-center space-x-3">
-            <button onclick="switchMainTab('profile')" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white cursor-pointer">
+            <button onclick="switchMainTab('profile', 'Profil')" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white cursor-pointer">
                 <i class="fa-solid fa-user"></i>
             </button>
             <span id="header-title" class="text-lg font-semibold">Sieć społeczna</span>
         </div>
         <div class="flex items-center space-x-4 text-lg">
-            <button onclick="switchMainTab('search')" class="cursor-pointer text-gray-400 hover:text-purple-400">
+            <button onclick="switchMainTab('search', 'Wyszukiwarka')" class="cursor-pointer text-gray-400 hover:text-purple-400">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-            <button onclick="switchMainTab('notifications')" class="cursor-pointer text-gray-400 hover:text-purple-400">
+            <button onclick="switchMainTab('notifications', 'Powiadomienia')" class="cursor-pointer text-gray-400 hover:text-purple-400">
                 <i class="fa-solid fa-bell"></i>
             </button>
         </div>
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Zawartość główna -->
-    <div id="tab-content" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 pb-20">
+    <div id="tab-content" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 pb-24">
         
         <!-- SEKCJA: DOM (Sieć społeczna) -->
         <div id="content-home" class="main-content space-y-4">
@@ -108,7 +108,7 @@
                             <i class="fa-regular fa-heart"></i>
                             <span>142</span>
                         </button>
-                        <button onclick="switchMainTab('comments')" class="flex items-center space-x-1 cursor-pointer hover:text-purple-400 transition-colors">
+                        <button onclick="switchMainTab('comments', 'Komentarze')" class="flex items-center space-x-1 cursor-pointer hover:text-purple-400 transition-colors">
                             <i class="fa-regular fa-comment"></i>
                             <span>98</span>
                         </button>
@@ -221,9 +221,78 @@
     </div>
 
     <!-- Dolny pasek nawigacyjny -->
-    <nav class="fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center pb-6 ..."
+    <div class="fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center bg-gray-950 border-t border-gray-800 py-3">
         <button onclick="switchMainTab('home', 'Sieć społeczna')" class="nav-btn text-purple-500 flex flex-col items-center cursor-pointer" data-target="home"><i class="fa-solid fa-house text-lg"></i></button>
         <button onclick="switchMainTab('gift', 'Bonusy')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="gift"><i class="fa-solid fa-gift text-lg"></i></button>
         <button onclick="switchMainTab('crypto', 'Kryptowaluty')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="crypto"><i class="fa-brands fa-bitcoin text-lg"></i></button>
-        <button onclick="switchMainTab('wallet', 'Portfel')" class
-  
+        <button onclick="switchMainTab('wallet', 'Portfel')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="wallet"><i class="fa-solid fa-wallet text-lg"></i></button>
+        <button onclick="switchMainTab('profile', 'Profil')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="profile"><i class="fa-solid fa-user text-lg"></i></button>
+        <button onclick="switchMainTab('menu', 'Menu')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="menu"><i class="fa-solid fa-bars text-lg"></i></button>
+    </div>
+
+    <script>
+        function switchMainTab(tabId, title) {
+            const mainContents = document.querySelectorAll('.main-content');
+            mainContents.forEach(content => content.classList.add('hidden'));
+
+            const subtabsGroups = document.querySelectorAll('.subtabs-group');
+            subtabsGroups.forEach(group => group.classList.add('hidden'));
+
+            const targetContent = document.getElementById('content-' + tabId);
+            if (targetContent) targetContent.classList.remove('hidden');
+
+            const targetSubtabs = document.getElementById('subtabs-' + tabId);
+            if (targetSubtabs) targetSubtabs.classList.remove('hidden');
+
+            if (title) {
+                document.getElementById('header-title').innerText = title;
+            }
+
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                if (btn.getAttribute('data-target') === tabId) {
+                    btn.classList.add('text-purple-500');
+                    btn.classList.remove('text-gray-400');
+                } else {
+                    btn.classList.remove('text-purple-500');
+                    btn.classList.add('text-gray-400');
+                }
+            });
+        }
+
+        function switchSubTab(parentTab, subTabId) {
+            const subContents = document.querySelectorAll('.subcontent-' + parentTab);
+            subContents.forEach(content => content.classList.add('hidden'));
+
+            const targetSubContent = document.getElementById('subcontent-' + parentTab + '-' + subTabId);
+            if (targetSubContent) targetSubContent.classList.remove('hidden');
+
+            const subtabBtns = document.querySelectorAll('.subtab-btn-' + parentTab);
+            subtabBtns.forEach(btn => {
+                btn.classList.remove('border-purple-500', 'text-purple-500');
+                btn.classList.add('border-transparent', 'text-gray-400');
+            });
+
+            event.currentTarget.classList.add('border-purple-500', 'text-purple-500');
+            event.currentTarget.classList.remove('border-transparent', 'text-gray-400');
+        }
+
+        function toggleLike(btn) {
+            const icon = btn.querySelector('i');
+            const span = btn.querySelector('span');
+            let count = parseInt(span.innerText);
+
+            if (icon.classList.contains('fa-regular')) {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid', 'text-purple-500');
+                span.innerText = count + 1;
+            } else {
+                icon.classList.remove('fa-solid', 'text-purple-500');
+                icon.classList.add('fa-regular');
+                span.innerText = count - 1;
+            }
+        }
+    </script>
+</body>
+                                                                                                                                                                   </html>
+
