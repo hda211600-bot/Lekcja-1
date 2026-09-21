@@ -189,8 +189,209 @@
         </div>
 
         <!-- WIDOKI GÓRNE (PROFIL, SZUKAJ, POWIADOMIENIA, KOMENTARZE) -->
-                <!-- WIDOK: PROFIL UŻYTKOWNIKA -->
+                        <!-- WIDOK: PROFIL UŻYTKOWNIKA -->
         <div id="content-profile" class="main-content space-y-4 hidden">
+            
+            <!-- EKRAN 1: GŁÓWNY PROFIL -->
+            <div id="profile-screen-main" class="space-y-4">
+                <!-- Główna karta profilu -->
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-5 relative">
+                    
+                    <!-- Przycisk zmiany motywu kolorów -->
+                    <div class="absolute top-4 right-4">
+                        <button onclick="toggleThemePicker()" class="w-8 h-8 rounded-lg bg-gray-800 border border-gray-700 text-purple-400 hover:text-white flex items-center justify-center cursor-pointer transition-colors shadow-sm" title="Zmień motyw kolorów">
+                            <i class="fa-solid fa-palette text-sm"></i>
+                        </button>
+                    </div>
+
+                    <!-- 1. Sekcja Avatara -->
+                    <div class="flex flex-col items-center justify-center pt-2">
+                        <div class="relative cursor-pointer group" onclick="openAvatarModal()">
+                            <div id="profile-avatar-preview" class="w-24 h-24 rounded-full bg-purple-600 flex items-center justify-center text-3xl font-bold text-white border-4 border-purple-500/30 shadow-lg overflow-hidden">
+                                <i class="fa-solid fa-user-astronaut"></i>
+                            </div>
+                            <div class="absolute bottom-0 right-0 bg-purple-600 text-white w-7 h-7 rounded-full flex items-center justify-center border-2 border-gray-900 text-xs shadow-md">
+                                <i class="fa-solid fa-camera"></i>
+                            </div>
+                        </div>
+                        <p class="text-[10px] text-gray-400 mt-2">Kliknij, aby zmienić avatar</p>
+                    </div>
+
+                    <!-- 2. Nazwa użytkownika z opcją edycji -->
+                    <div class="text-center space-y-1">
+                        <div class="flex items-center justify-center space-x-2">
+                            <h2 id="user-display-name" class="text-lg font-bold text-white">TECHNIX-PRO</h2>
+                            <button onclick="editUsername()" class="text-gray-400 hover:text-purple-400 text-xs p-1 cursor-pointer" title="Edytuj nazwę">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3. Statystyki / Poziom -->
+                    <div class="grid grid-cols-3 gap-2 pt-2 border-t border-gray-800 text-center">
+                        <div class="bg-gray-950 p-2.5 rounded-xl border border-gray-800/60">
+                            <span class="block text-xs text-gray-400">Poziom</span>
+                            <span class="text-sm font-bold text-purple-400">LVL 12</span>
+                        </div>
+                        <div class="bg-gray-950 p-2.5 rounded-xl border border-gray-800/60">
+                            <span class="block text-xs text-gray-400">Punkty</span>
+                            <span class="text-sm font-bold text-white">2,450 XP</span>
+                        </div>
+                        <div class="bg-gray-950 p-2.5 rounded-xl border border-gray-800/60">
+                            <span class="block text-xs text-gray-400">Ranga</span>
+                            <span class="text-sm font-bold text-purple-400">Pro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista opcji / Menu nawigacji w profilu -->
+                <div class="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden divide-y divide-gray-800 text-sm">
+                    <!-- Dane osobowe -->
+                    <button onclick="openProfileSubscreen('details')" class="w-full px-4 py-3.5 flex items-center justify-between text-gray-300 hover:bg-gray-800/50 cursor-pointer transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-id-card text-purple-400 w-5"></i>
+                            <span>Dane osobowe</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+                    </button>
+
+                    <!-- Weryfikacja -->
+                    <button onclick="openProfileSubscreen('verification')" class="w-full px-4 py-3.5 flex items-center justify-between text-gray-300 hover:bg-gray-800/50 cursor-pointer transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-purple-400 w-5"></i>
+                            <span>Weryfikacja konta</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-purple-400 bg-purple-950/60 px-2 py-0.5 rounded-full border border-purple-500/30">Zweryfikowany</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+                        </div>
+                    </button>
+
+                    <!-- Bezpieczeństwo i Hasło -->
+                    <button onclick="openProfileSubscreen('security')" class="w-full px-4 py-3.5 flex items-center justify-between text-gray-300 hover:bg-gray-800/50 cursor-pointer transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-shield-halved text-purple-400 w-5"></i>
+                            <span>Bezpieczeństwo i Hasło</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+                    </button>
+
+                    <!-- Wyloguj się -->
+                    <button onclick="confirmLogout()" class="w-full px-4 py-3.5 flex items-center justify-between text-red-400 hover:bg-gray-800/50 cursor-pointer transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-right-from-bracket w-5"></i>
+                            <span>Wyloguj się</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- EKRAN 2: DANE OSOBOWE -->
+            <div id="profile-screen-details" class="profile-subscreen hidden space-y-4">
+                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 hover:text-purple-300 cursor-pointer mb-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Powrót do profilu</span>
+                </button>
+
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Dane osobowe</h3>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block text-gray-400 mb-1">Imię i Nazwisko / Pseudonim</label>
+                            <input type="text" id="input-fullname" value="Jan Kowalski" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-1">Adres e-mail</label>
+                            <input type="email" id="input-email" value="jan.kowalski@technix-pro.io" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-1">Numer telefonu</label>
+                            <input type="tel" id="input-phone" value="+48 600 700 800" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                    </div>
+
+                    <button onclick="savePersonalDetails()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs rounded-xl cursor-pointer transition-colors">
+                        Zapisz dane
+                    </button>
+                </div>
+            </div>
+
+            <!-- EKRAN 3: WERYFIKACJA KONTA -->
+            <div id="profile-screen-verification" class="profile-subscreen hidden space-y-4">
+                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 hover:text-purple-300 cursor-pointer mb-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Powrót do profilu</span>
+                </button>
+
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                        <h3 class="font-bold text-white text-base">Status weryfikacji</h3>
+                        <span class="text-xs text-green-400 bg-green-950/60 px-2.5 py-1 rounded-full border border-green-500/30 flex items-center space-x-1">
+                            <i class="fa-solid fa-check text-[10px]"></i>
+                            <span>Aktywne</span>
+                        </span>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div class="flex items-center justify-between p-3 bg-gray-950 rounded-xl border border-gray-800">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-solid fa-envelope text-purple-400 text-base"></i>
+                                <div>
+                                    <p class="font-semibold text-white">Weryfikacja E-mail</p>
+                                    <p class="text-[10px] text-gray-400">Adres e-mail został potwierdzony</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-950 rounded-xl border border-gray-800">
+                            <div class="flex items-center space-x-3">
+                                <i class="fa-solid fa-id-card text-purple-400 text-base"></i>
+                                <div>
+                                    <p class="font-semibold text-white">Weryfikacja tożsamości (KYC)</p>
+                                    <p class="text-[10px] text-gray-400">Dokument tożsamości zatwierdzony</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-circle-check text-green-400 text-base"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EKRAN 4: BEZPIECZEŃSTWO I HASŁO -->
+            <div id="profile-screen-security" class="profile-subscreen hidden space-y-4">
+                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 hover:text-purple-300 cursor-pointer mb-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Powrót do profilu</span>
+                </button>
+
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Zmiana hasła</h3>
+
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block text-gray-400 mb-1">Obecne hasło</label>
+                            <input type="password" id="input-old-pass" placeholder="••••••••" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-1">Nowe hasło</label>
+                            <input type="password" id="input-new-pass" placeholder="••••••••" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-1">Powtórz nowe hasło</label>
+                            <input type="password" id="input-confirm-pass" placeholder="••••••••" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                    </div>
+
+                    <button onclick="saveNewPassword()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs rounded-xl cursor-pointer transition-colors">
+                        Zaktualizuj hasło
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        
             <!-- Glówna karta profilu -->
             <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-5 relative">
                 
