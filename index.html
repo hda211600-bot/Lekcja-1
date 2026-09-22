@@ -1,552 +1,76 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sieć społeczna - Technix-Pro</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="animations.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#080b14">
+  <title>Technix-Pro — Portfel cyfrowy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="animations.css">
   <style>
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
+    :root { --bg:#080b14; --panel:#111624; --line:#232b3d; --muted:#8d98ae; --purple:#8b5cf6; --cyan:#22d3ee; --green:#34d399; }
+    * { box-sizing:border-box; }
+    body { background:var(--bg); color:#f8fafc; min-height:100dvh; }
+    .app-shell { max-width:720px; margin:auto; }
+    .panel { background:linear-gradient(145deg, rgba(20,27,43,.96), rgba(12,16,28,.96)); border:1px solid var(--line); box-shadow:0 14px 40px rgba(0,0,0,.18); }
+    .muted { color:var(--muted); }
+    .gradient-text { background:linear-gradient(90deg,#c4b5fd,#67e8f9); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .nav-btn { min-width:54px; color:var(--muted); }
+    .nav-btn.active { color:#c4b5fd; }
+    .nav-btn i { font-size:1.05rem; }
+    .nav-btn span { font-size:.62rem; margin-top:4px; }
+    .chart { height:100px; position:relative; overflow:hidden; }
+    .chart svg { width:100%; height:100%; }
+    .quick-btn { background:#171e31; border:1px solid #29334a; }
+    .quick-btn:active { transform:scale(.96); }
+    .asset-row { border-bottom:1px solid rgba(35,43,61,.7); }
+    .asset-row:last-child { border-bottom:0; }
+    .hidden { display:none !important; }
+    input, textarea { color:#fff; }
+    @media (min-width:640px) { body { padding:24px 0; } .app-shell { min-height:calc(100dvh - 48px); border-radius:28px; overflow:hidden; border:1px solid #20283a; } }
+  </style>
 </head>
+<body class="font-sans">
+  <main class="app-shell flex flex-col min-h-[100dvh] bg-[#080b14]">
+    <header class="px-5 pt-5 pb-4 flex items-center justify-between border-b border-slate-800/80 sticky top-0 z-20 bg-[#080b14]/95 backdrop-blur-xl">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-violet-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-violet-500/20"><i class="fa-solid fa-microchip"></i></div>
+        <div><p class="text-[10px] uppercase tracking-[.2em] muted">Technix-Pro</p><h1 id="page-title" class="font-bold text-lg">Pulpit</h1></div>
+      </div>
+      <div class="flex items-center gap-4"><button onclick="showTab('notifications','Powiadomienia')" class="relative muted text-lg"><i class="fa-regular fa-bell"></i><b class="absolute -top-1 -right-2 w-2 h-2 rounded-full bg-cyan-400"></b></button><button onclick="showTab('profile','Profil')" class="w-9 h-9 rounded-full bg-slate-800 border border-slate-700 text-cyan-300"><i class="fa-solid fa-user"></i></button></div>
+    </header>
 
-<body class="bg-black text-white font-sans flex flex-col h-[100dvh] overflow-hidden relative">
+    <section id="screen-pulpit" class="screen flex-1 p-4 space-y-4 pb-28">
+      <div class="flex items-center justify-between"><div><p class="text-sm muted">Dzień dobry, TechnixUser</p><h2 class="text-2xl font-bold">Twój portfel</h2></div><span class="px-2.5 py-1 rounded-full bg-emerald-400/10 text-emerald-300 text-[10px] border border-emerald-400/20"><i class="fa-solid fa-circle text-[6px] mr-1"></i> ONLINE</span></div>
+      <div class="panel rounded-3xl p-5 relative overflow-hidden"><div class="absolute -right-12 -top-14 w-40 h-40 rounded-full bg-violet-500/20 blur-3xl"></div><div class="relative"><div class="flex justify-between items-start"><p class="text-xs muted">Łączna wartość aktywów <i class="fa-regular fa-eye ml-1"></i></p><span class="text-xs text-emerald-300">+8,42% <i class="fa-solid fa-arrow-trend-up"></i></span></div><div class="text-3xl font-bold mt-2">24 680,42 <span class="text-base muted">PLN</span></div><p class="text-xs muted mt-1">≈ 6 180,11 USD</p><div class="chart mt-5"><svg viewBox="0 0 500 120" preserveAspectRatio="none"><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".45"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/></linearGradient></defs><path d="M0 100 C35 92 45 86 75 91 S120 65 145 75 S180 54 205 65 S240 35 265 52 S300 42 325 48 S360 22 390 37 S430 12 455 22 S480 7 500 12 V120 H0Z" fill="url(#fill)"/><path d="M0 100 C35 92 45 86 75 91 S120 65 145 75 S180 54 205 65 S240 35 265 52 S300 42 325 48 S360 22 390 37 S430 12 455 22 S480 7 500 12" fill="none" stroke="#a78bfa" stroke-width="3"/></svg></div><div class="flex justify-between text-[10px] muted"><span>7 dni temu</span><span>Dzisiaj</span></div></div></div>
+      <div class="grid grid-cols-4 gap-2"><button class="quick-btn rounded-2xl p-3 text-center" onclick="toast('Funkcja wpłat będzie dostępna po podłączeniu operatora.')"><i class="fa-solid fa-plus text-emerald-300"></i><span class="block text-[10px] mt-2">Wpłać</span></button><button class="quick-btn rounded-2xl p-3 text-center" onclick="toast('Wybierz aktywo, aby rozpocząć wysyłkę.')"><i class="fa-solid fa-arrow-up text-cyan-300"></i><span class="block text-[10px] mt-2">Wyślij</span></button><button class="quick-btn rounded-2xl p-3 text-center" onclick="showTab('exchange','Giełda')"><i class="fa-solid fa-right-left text-violet-300"></i><span class="block text-[10px] mt-2">Wymień</span></button><button class="quick-btn rounded-2xl p-3 text-center" onclick="showTab('earn','Zarabiaj')"><i class="fa-solid fa-gift text-amber-300"></i><span class="block text-[10px] mt-2">Zarabiaj</span></button></div>
+      <div class="flex items-center justify-between"><h3 class="font-bold">Twoje aktywa</h3><button onclick="showTab('wallet','Portfel')" class="text-xs text-violet-300">Zobacz wszystkie <i class="fa-solid fa-chevron-right ml-1"></i></button></div>
+      <div class="panel rounded-2xl px-4"><asset-row icon="₿" name="Bitcoin" ticker="BTC" value="12 420,80 PLN" change="+5,24%" color="bg-orange-500"></asset-row><asset-row icon="Ξ" name="Ethereum" ticker="ETH" value="7 842,15 PLN" change="+3,81%" color="bg-indigo-500"></asset-row><asset-row icon="₿" name="USDC" ticker="USDC" value="4 417,47 PLN" change="+0,02%" color="bg-cyan-600"></asset-row></div>
+      <div class="flex items-center justify-between pt-1"><h3 class="font-bold">Ostatnia aktywność</h3><button onclick="showTab('activity','Aktywność')" class="text-xs text-violet-300">Historia</button></div><div class="panel rounded-2xl p-4 space-y-4"><activity icon="fa-arrow-down" title="Otrzymano Bitcoin" date="Dzisiaj, 14:32" amount="+0,0042 BTC" color="text-emerald-300"></activity><activity icon="fa-arrow-up" title="Wysłano Ethereum" date="Wczoraj, 19:08" amount="-0,12 ETH" color="text-rose-300"></activity></div>
+    </section>
 
-    <div class="flex items-center justify-between px-4 py-3 bg-black border-b border-gray-800 flex-shrink-0 z-10">
-        <div class="flex items-center space-x-3">
-            <button onclick="switchMainTab('profile', 'Profil')" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white cursor-pointer">
-                <i class="fa-solid fa-user"></i>
-            </button>
-            <span id="header-title" class="text-lg font-semibold">Sieć społeczna</span>
-        </div>
-        <div class="flex items-center space-x-4 text-lg">
-            <button onclick="switchMainTab('search', 'Wyszukiwarka')" class="cursor-pointer text-gray-400 hover:text-purple-400">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <button onclick="switchMainTab('notifications', 'Powiadomienia')" class="cursor-pointer text-gray-400 hover:text-purple-400">
-                <i class="fa-solid fa-bell"></i>
-            </button>
-        </div>
-    </div>
+    <section id="screen-wallet" class="screen hidden flex-1 p-4 space-y-4 pb-28"><div><p class="text-sm muted">Zarządzaj środkami</p><h2 class="text-2xl font-bold">Portfel</h2></div><div class="panel rounded-3xl p-5"><p class="text-xs muted">Saldo dostępne</p><p class="text-3xl font-bold mt-2">24 680,42 PLN</p><div class="flex gap-2 mt-5"><button class="flex-1 rounded-xl bg-violet-600 py-3 text-sm font-semibold" onclick="toast('Moduł wpłat zostanie aktywowany wkrótce.')">Wpłać środki</button><button class="flex-1 rounded-xl bg-slate-800 py-3 text-sm" onclick="toast('Wybierz aktywo do wypłaty.')">Wypłać</button></div></div><div class="panel rounded-2xl p-4"><div class="flex justify-between mb-4"><h3 class="font-bold">Wszystkie aktywa</h3><button class="text-violet-300 text-xs" onclick="showTab('exchange','Giełda')">Wymień</button></div><asset-row icon="₿" name="Bitcoin" ticker="BTC" value="12 420,80 PLN" change="50,33%" color="bg-orange-500"></asset-row><asset-row icon="Ξ" name="Ethereum" ticker="ETH" value="7 842,15 PLN" change="31,78%" color="bg-indigo-500"></asset-row><asset-row icon="₿" name="USD Coin" ticker="USDC" value="4 417,47 PLN" change="17,90%" color="bg-cyan-600"></asset-row></div></section>
 
-    <div id="subtabs-home" class="subtabs-group flex justify-around border-b border-gray-800 text-sm font-medium flex-shrink-0 bg-black z-10">
-        <button onclick="switchSubTab('home', 'kanal', event)" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-purple-500 text-purple-500">Kanał</button>
-        <button onclick="switchSubTab('home', 'grupa', event)" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Grupa</button>
-        <button onclick="switchSubTab('home', 'info', event)" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Info</button>
-    </div>
+    <section id="screen-exchange" class="screen hidden flex-1 p-4 space-y-4 pb-28"><div><p class="text-sm muted">Rynek aktywów cyfrowych</p><h2 class="text-2xl font-bold">Giełda</h2></div><div class="flex gap-2 overflow-x-auto pb-1"><button class="px-4 py-2 rounded-xl bg-violet-600 text-xs">Popularne</button><button class="px-4 py-2 rounded-xl bg-slate-800 text-xs whitespace-nowrap">Największe wzrosty</button><button class="px-4 py-2 rounded-xl bg-slate-800 text-xs">Stablecoiny</button></div><div class="panel rounded-2xl p-4 space-y-1"><div class="grid grid-cols-4 text-[10px] muted pb-3"><span>Aktywo</span><span class="text-right">Kurs</span><span class="text-right">24h</span><span></span></div><market name="Bitcoin" ticker="BTC" price="271 840 PLN" change="+5,24%" icon="₿" color="bg-orange-500"></market><market name="Ethereum" ticker="ETH" price="13 420 PLN" change="+3,81%" icon="Ξ" color="bg-indigo-500"></market><market name="Solana" ticker="SOL" price="582 PLN" change="+12,47%" icon="S" color="bg-fuchsia-500"></market><market name="USD Coin" ticker="USDC" price="4,02 PLN" change="+0,02%" icon="₿" color="bg-cyan-600"></market></div></section>
 
-    <div id="subtabs-gift" class="subtabs-group hidden flex justify-around border-b border-gray-800 text-sm font-medium flex-shrink-0 bg-black z-10">
-        <button onclick="switchSubTab('gift', 'promocje', event)" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-purple-500 text-purple-500">Promocje</button>
-        <button onclick="switchSubTab('gift', 'nagrody', event)" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Nagrody</button>
-        <button onclick="switchSubTab('gift', 'zadania', event)" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Zadania</button>
-    </div>
+    <section id="screen-earn" class="screen hidden flex-1 p-4 space-y-4 pb-28"><div><p class="text-sm muted">Zwiększaj swoje saldo</p><h2 class="text-2xl font-bold">Zarabiaj</h2></div><div class="panel rounded-3xl p-5 bg-gradient-to-br from-violet-900/60 to-cyan-900/30"><span class="text-xs text-cyan-200">TECHNIX EARN</span><h3 class="text-xl font-bold mt-2">Twoje aktywa mogą pracować</h3><p class="text-xs muted mt-2">Zablokuj wybrane aktywa i odbieraj nagrody co tydzień.</p><button onclick="toast('Oferta Earn została dodana do obserwowanych.')" class="mt-4 px-4 py-2 rounded-xl bg-white text-slate-900 text-xs font-bold">Sprawdź oferty</button></div><div class="panel rounded-2xl p-4 space-y-4"><div class="flex justify-between items-center"><div><b>USDC Earn</b><p class="text-xs muted mt-1">Elastyczny • wypłata w każdej chwili</p></div><strong class="text-emerald-300">5,20% APY</strong></div><div class="flex justify-between items-center"><div><b>ETH Staking</b><p class="text-xs muted mt-1">Okres 30 dni</p></div><strong class="text-emerald-300">4,10% APY</strong></div></div></section>
 
-    <div id="tab-content" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 pb-24">
+    <section id="screen-activity" class="screen hidden flex-1 p-4 space-y-4 pb-28"><div><p class="text-sm muted">Przejrzysta historia</p><h2 class="text-2xl font-bold">Aktywność</h2></div><div class="flex gap-2"><button class="px-4 py-2 rounded-xl bg-violet-600 text-xs">Wszystko</button><button class="px-4 py-2 rounded-xl bg-slate-800 text-xs">Wpłaty</button><button class="px-4 py-2 rounded-xl bg-slate-800 text-xs">Wypłaty</button></div><div class="panel rounded-2xl p-4 space-y-1"><activity icon="fa-arrow-down" title="Otrzymano Bitcoin" date="Dzisiaj, 14:32" amount="+0,0042 BTC" color="text-emerald-300"></activity><activity icon="fa-arrow-up" title="Wysłano Ethereum" date="Wczoraj, 19:08" amount="-0,12 ETH" color="text-rose-300"></activity><activity icon="fa-right-left" title="Wymiana USDC → PLN" date="12 września, 10:44" amount="+1 205,00 PLN" color="text-emerald-300"></activity><activity icon="fa-gift" title="Bonus Technix-Pro" date="10 września, 08:20" amount="+25,00 PLN" color="text-amber-300"></activity></div></section>
 
-        <div id="content-home" class="main-content space-y-4">
-            <div id="subcontent-home-kanal" class="subcontent-home space-y-4">
-                <div class="flex items-center justify-between bg-gray-900 p-3 rounded-xl border border-gray-800">
-                    <div class="flex items-center space-x-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-                        <span class="text-sm">Status sieci: Online</span>
-                    </div>
-                    <span class="text-xs text-gray-400">Aktualizacja v2.4</span>
-                </div>
+    <section id="screen-profile" class="screen hidden flex-1 p-4 space-y-4 pb-28"><div class="panel rounded-3xl p-6 text-center"><div class="mx-auto w-20 h-20 rounded-3xl bg-gradient-to-br from-violet-600 to-cyan-400 flex items-center justify-center text-3xl shadow-xl shadow-violet-500/20"><i class="fa-solid fa-user"></i></div><h2 class="text-xl font-bold mt-3">TechnixUser <span class="text-[10px] align-middle px-2 py-1 rounded-full bg-violet-500/20 text-violet-300">PRO</span></h2><p class="text-xs muted mt-1">UID: #TX-2609-PRO</p></div><div class="panel rounded-2xl divide-y divide-slate-800"><button class="w-full p-4 flex justify-between text-sm" onclick="toast('Ustawienia bezpieczeństwa są aktywne.')"><span><i class="fa-solid fa-shield-halved text-emerald-300 w-6"></i> Bezpieczeństwo</span><i class="fa-solid fa-chevron-right muted"></i></button><button class="w-full p-4 flex justify-between text-sm" onclick="toast('Powiadomienia PUSH: włączone.')"><span><i class="fa-solid fa-bell text-cyan-300 w-6"></i> Powiadomienia</span><i class="fa-solid fa-chevron-right muted"></i></button><button class="w-full p-4 flex justify-between text-sm" onclick="toast('Centrum pomocy otworzy się wkrótce.')"><span><i class="fa-solid fa-circle-question text-violet-300 w-6"></i> Pomoc i kontakt</span><i class="fa-solid fa-chevron-right muted"></i></button></div></section>
 
-                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-3">
-                    <h3 class="font-medium text-sm">Ankieta Społeczności</h3>
-                    <p class="text-xs text-gray-400">Co chcesz zobaczyć w kolejnej aktualizacji?</p>
+    <section id="screen-notifications" class="screen hidden flex-1 p-4 space-y-4 pb-28"><div><p class="text-sm muted">Bądź na bieżąco</p><h2 class="text-2xl font-bold">Powiadomienia</h2></div><div class="panel rounded-2xl p-4 space-y-4"><activity icon="fa-shield-halved" title="Portfel jest zabezpieczony" date="Dzisiaj, 09:12" amount="OK" color="text-emerald-300"></activity><activity icon="fa-chart-line" title="Bitcoin rośnie o 5,24%" date="Dzisiaj, 08:45" amount="BTC" color="text-cyan-300"></activity></div></section>
 
-                    <div class="space-y-2">
-                        <div>
-                            <div class="flex justify-between text-xs mb-1">
-                                <span>Więcej narzędzi AI Analysis</span>
-                                <span>54%</span>
-                            </div>
-                            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
-                                <div class="bg-purple-600 h-full" style="width: 54%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs mb-1">
-                                <span>Więcej funkcji społecznościowych</span>
-                                <span>46%</span>
-                            </div>
-                            <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
-                                <div class="bg-purple-600 h-full" style="width: 46%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gray-900 rounded-xl border border-gray-800 p-4 space-y-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center font-bold">T</div>
-                        <div>
-                            <h4 class="text-sm font-bold">Technix-Pro!</h4>
-                            <span class="text-xs text-gray-400">Dzisiaj, 12:45</span>
-                        </div>
-                    </div>
-                    <p class="text-sm">🚀 Rusza nowy etap rozwoju Technix-Pro! Dziękujemy, że jesteście z nami. Wprowadzamy nowe narzędzia analityczne oraz usprawniamy działanie całej platformy.</p>
-                    <div class="flex items-center space-x-6 text-gray-400 text-sm pt-2 border-t border-gray-800">
-                        <button onclick="toggleLike(this)" class="flex items-center space-x-1 cursor-pointer hover:text-purple-400 transition-colors">
-                            <i class="fa-regular fa-heart"></i>
-                            <span>142</span>
-                        </button>
-                        <button onclick="switchMainTab('comments', 'Komentarze')" class="flex items-center space-x-1 cursor-pointer hover:text-purple-400 transition-colors">
-                            <i class="fa-regular fa-comment"></i>
-                            <span>98</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="subcontent-home-grupa" class="subcontent-home space-y-4 hidden">
-                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-3">
-                    <h3 class="font-bold text-sm">Dyskusja w grupie</h3>
-                    <textarea placeholder="Napisz coś do grupy..." class="w-full bg-gray-950 border border-gray-800 rounded-lg p-3 text-sm focus:outline-none focus:border-purple-500 resize-none h-20"></textarea>
-                    <div class="flex justify-between items-center">
-                        <button class="text-gray-400 hover:text-white cursor-pointer"><i class="fa-regular fa-image"></i></button>
-                        <button class="bg-purple-600 text-white text-xs px-4 py-2 rounded-lg font-medium cursor-pointer">Opublikuj</button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="subcontent-home-info" class="subcontent-home space-y-4 hidden">
-                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-2 text-center">
-                    <h3 class="font-bold text-purple-400 text-base">NEW LOGO AND BRANDING UPDATE!</h3>
-                    <p class="text-xs text-gray-300">Wprowadzamy oficjalny TECHNIX-PRO w pełnym zakresie.</p>
-                </div>
-            </div>
-
-            <section class="relative bg-slate-950 py-24 px-6 overflow-hidden min-h-[600px] flex items-center justify-center">
-                <div class="absolute inset-0 z-0">
-                    <img src="procesor.png" alt="Core Engine Background" class="w-full h-full object-cover object-center opacity-40 mix-blend-luminosity scale-105 transform hover:scale-100 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950"></div>
-                    <div class="absolute inset-0 bg-radial-glow opacity-60"></div>
-                </div>
-
-                <div class="relative z-10 max-w-5xl mx-auto text-center space-y-8">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 backdrop-blur-md text-cyan-400 text-sm font-semibold tracking-wider uppercase">
-                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                        Core Engine Architecture
-                    </div>
-
-                    <h2 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight drop-shadow-lg">
-                        Napędzane Przez <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent">Najnowszą Technologię</span>
-                    </h2>
-
-                    <p class="text-slate-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-                        Nasz autorski rdzeń zapewnia bezkonkurencyjną wydajność, ultra-niskie opóźnienia oraz najwyższy poziom bezpieczeństwa procesów.
-                    </p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 text-left">
-                        <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl hover:border-cyan-500/50 transition-all duration-300 shadow-xl">
-                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4 font-bold text-xl">01</div>
-                            <h3 class="text-xl font-bold text-white mb-2">Ultra-Wydajność</h3>
-                            <p class="text-slate-400 text-sm">Brak opóźnień i pełne wykorzystanie mocy obliczeniowej w czasie rzeczywistym.</p>
-                        </div>
-
-                        <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl hover:border-blue-500/50 transition-all duration-300 shadow-xl">
-                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4 font-bold text-xl">02</div>
-                            <h3 class="text-xl font-bold text-white mb-2">Pełna Skalowalność</h3>
-                            <p class="text-slate-400 text-sm">Elastyczne dostosowanie zasobów do bieżącego obciążenia systemu.</p>
-                        </div>
-
-                        <div class="p-6 rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl hover:border-indigo-500/50 transition-all duration-300 shadow-xl">
-                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-4 font-bold text-xl">03</div>
-                            <h3 class="text-xl font-bold text-white mb-2">Szyfrowanie Hardware</h3>
-                            <p class="text-slate-400 text-sm">Ochrona danych na poziomie sprzętowym gwarantująca pełną prywatność.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div id="content-gift" class="main-content space-y-4 hidden">
-            <div id="subcontent-gift-promocje" class="subcontent-gift space-y-4">
-                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center space-y-2">
-                    <h3 class="font-bold text-purple-400 text-base">Aktualne Promocje</h3>
-                    <p class="text-xs text-gray-300">Skorzystaj ze specjalnych ofert i zyskaj więcej!</p>
-                </div>
-            </div>
-
-            <div id="subcontent-gift-nagrody" class="subcontent-gift space-y-4 hidden">
-                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center space-y-2">
-                    <h3 class="font-bold text-purple-400 text-base">Twoje Nagrody</h3>
-                    <p class="text-xs text-gray-300">Odbierz swoje codzienne bonusy i skrzynki.</p>
-                </div>
-            </div>
-
-            <div id="subcontent-gift-zadania" class="subcontent-gift space-y-4 hidden">
-                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center space-y-2">
-                    <h3 class="font-bold text-purple-400 text-base">Zadania codzienne</h3>
-                    <p class="text-xs text-gray-300">Wykonaj zadania, aby zdobyć dodatkowe punkty.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="content-crypto" class="main-content space-y-4 hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
-                <h3 class="font-bold text-purple-400 text-base mb-2">Kryptowaluty</h3>
-                <p class="text-xs text-gray-300">Panel rynkowy i kursy Bitcoin.</p>
-            </div>
-        </div>
-
-        <div id="content-wallet" class="main-content space-y-4 hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
-                <h3 class="font-bold text-purple-400 text-base mb-2">Portfel i Waluty</h3>
-                <p class="text-xs text-gray-300">Stan Twojego konta oraz aktywa.</p>
-            </div>
-        </div>
-
-        <div id="content-menu" class="main-content space-y-4 hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-2">
-                <h3 class="font-bold text-purple-400 text-base mb-2">Menu główne</h3>
-                <p class="text-xs text-gray-300">• Ustawienia konta</p>
-                <p class="text-xs text-gray-300">• Regulamin</p>
-                <p class="text-xs text-gray-300">• Pomoc i kontakt</p>
-            </div>
-        </div>
-
-        <div id="content-profile" class="main-content space-y-4 hidden">
-            <div id="profile-screen-main" class="space-y-4 pb-6">
-                <div class="text-center space-y-2 pt-2">
-                    <div class="relative w-20 h-20 mx-auto">
-                        <div class="w-full h-full rounded-2xl bg-gradient-to-tr from-purple-600 to-cyan-500 p-0.5 shadow-lg shadow-purple-500/20">
-                            <div class="w-full h-full bg-gray-950 rounded-[14px] flex items-center justify-center text-2xl font-bold text-cyan-400">
-                                <i class="fa-solid fa-microchip"></i>
-                            </div>
-                        </div>
-                        <span class="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-2 border-gray-950 rounded-full flex items-center justify-center text-[10px] text-gray-950 font-bold" title="Online">●</span>
-                    </div>
-
-                    <div class="flex items-center justify-center space-x-2 pt-1">
-                        <h2 class="text-lg font-bold text-white tracking-wide">TechnixUser</h2>
-                        <span class="px-1.5 py-0.5 text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-md">PRO</span>
-                    </div>
-
-                    <div class="flex items-center justify-center space-x-1.5 text-xs text-gray-400">
-                        <span class="font-mono text-gray-400">UID: #TX-2609-PRO</span>
-                        <i class="fa-regular fa-copy cursor-pointer hover:text-cyan-400 transition-colors"></i>
-                    </div>
-
-                    <div class="flex justify-center items-center gap-1.5 text-[10px] pt-1">
-                        <span class="px-2 py-0.5 rounded-full bg-gray-900 text-gray-300 border border-gray-800"><i class="fa-solid fa-shield-halved text-purple-400"></i> Encrypted</span>
-                        <span class="px-2 py-0.5 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/60"><i class="fa-solid fa-bolt text-xs"></i> Level 12</span>
-                        <span class="px-2 py-0.5 rounded-full bg-cyan-950/60 text-cyan-400 border border-cyan-800/60"><i class="fa-solid fa-crown text-xs"></i> VIP Member</span>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-r from-purple-900/40 via-gray-900 to-gray-900 p-4 rounded-2xl border border-purple-500/30 flex items-center justify-between shadow-md">
-                    <div class="space-y-0.5">
-                        <div class="flex items-center space-x-1.5">
-                            <span class="text-xs font-bold text-purple-300 uppercase tracking-wider">Technix Alliance</span>
-                        </div>
-                        <p class="text-xs font-semibold text-white">Zapraszaj i zgarniaj 35% prowizji</p>
-                        <p class="text-[10px] text-gray-400">Twój kod: <span class="text-cyan-400 font-mono">TECHNIX-2026</span></p>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-purple-600/20 border border-purple-500/40 flex items-center justify-center text-purple-300 text-lg shadow-inner">
-                        <i class="fa-solid fa-users-rays"></i>
-                    </div>
-                </div>
-
-                <div class="space-y-1.5">
-                    <span class="text-[11px] text-gray-400 uppercase tracking-wider px-1 font-semibold">Status & Postęp</span>
-                    <div class="bg-gray-900 rounded-2xl border border-gray-800/80 divide-y divide-gray-800/50 text-xs">
-                        <div class="p-3.5 flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <i class="fa-solid fa-chart-line text-purple-400 w-4 text-center"></i>
-                                <span class="text-gray-200 font-medium">Poziom Konta & XP</span>
-                            </div>
-                            <span class="text-purple-400 font-bold font-mono">2,450 / 3,000 XP</span>
-                        </div>
-                        <div class="p-3.5 flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <i class="fa-solid fa-gem text-cyan-400 w-4 text-center"></i>
-                                <span class="text-gray-200 font-medium">Przywileje VIP</span>
-                            </div>
-                            <span class="text-gray-400">Poziom 1 (Odblokowany)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-1.5">
-                    <span class="text-[11px] text-gray-400 uppercase tracking-wider px-1 font-semibold">Bezpieczeństwo & System</span>
-                    <div class="bg-gray-900 rounded-2xl border border-gray-800/80 divide-y divide-gray-800/50 text-xs">
-                        <button onclick="openProfileSubscreen('security')" class="w-full p-3.5 flex items-center justify-between text-left cursor-pointer hover:bg-gray-850 transition-colors">
-                            <div class="flex items-center space-x-3">
-                                <i class="fa-solid fa-lock text-emerald-400 w-4 text-center"></i>
-                                <span class="text-gray-200 font-medium">Ustawienia Bezpieczeństwa</span>
-                            </div>
-                            <span class="text-gray-400 flex items-center gap-1">Zmień hasło <i class="fa-solid fa-chevron-right text-[9px] text-gray-500"></i></span>
-                        </button>
-                        <div class="p-3.5 flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <i class="fa-solid fa-sliders text-gray-400 w-4 text-center"></i>
-                                <span class="text-gray-200 font-medium">Ustawienia Aplikacji</span>
-                            </div>
-                            <i class="fa-solid fa-chevron-right text-[9px] text-gray-500"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="profile-screen-security" class="profile-subscreen hidden space-y-4">
-                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Powrót do profilu</span>
-                </button>
-                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
-                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Zmiana hasła</h3>
-                    <div class="space-y-3 text-xs">
-                        <div>
-                            <label class="block text-gray-400 mb-1">Obecne hasło</label>
-                            <input type="password" id="input-old-pass" placeholder="••••••••" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
-                        </div>
-                        <div>
-                            <label class="block text-gray-400 mb-1">Nowe hasło</label>
-                            <input type="password" id="input-new-pass" placeholder="••••••••" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
-                        </div>
-                    </div>
-                    <button onclick="saveNewPassword()" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs rounded-xl cursor-pointer">
-                        Zaktualizuj hasło
-                    </button>
-                </div>
-            </div>
-
-            <div id="profile-screen-referral" class="profile-subscreen hidden space-y-4">
-                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Powrót do profilu</span>
-                </button>
-                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
-                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2 flex items-center justify-between">
-                        <span>Technix Alliance</span>
-                        <span class="text-xs text-purple-400 font-mono">35% Prowizji</span>
-                    </h3>
-                    <div class="space-y-3 text-xs">
-                        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 space-y-1">
-                            <span class="text-gray-400 block">Twój unikalny link polecający:</span>
-                            <div class="flex items-center justify-between bg-gray-900 p-2 rounded-lg font-mono text-cyan-400">
-                                <span>https://technix-pro.app/ref/TECHNIX-2026</span>
-                                <i class="fa-regular fa-copy cursor-pointer hover:text-white" onclick="alert('Skopiowano link polecający!')"></i>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 text-center pt-2">
-                            <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
-                                <span class="block text-gray-400 text-[10px]">Zaproszeni użytkownicy</span>
-                                <span class="text-base font-bold text-white">0</span>
-                            </div>
-                            <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
-                                <span class="block text-gray-400 text-[10px]">Zarobek ogółem</span>
-                                <span class="text-base font-bold text-emerald-400">$0.00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="profile-screen-status" class="profile-subscreen hidden space-y-4">
-                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Powrót do profilu</span>
-                </button>
-                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
-                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Status & Postęp XP</h3>
-                    <div class="space-y-3 text-xs">
-                        <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="text-gray-400">Poziom 12 (Cyber Architect)</span>
-                                <span class="text-purple-400 font-bold">2,450 / 3,000 XP</span>
-                            </div>
-                            <div class="w-full bg-gray-950 h-3 rounded-full overflow-hidden border border-gray-800">
-                                <div class="bg-gradient-to-r from-purple-600 to-cyan-400 h-full rounded-full" style="width: 81%;"></div>
-                            </div>
-                        </div>
-                        <p class="text-gray-400 text-[11px] pt-2">Zdobywaj XP za aktywność w aplikacji, udział w ankietach i zapraszanie znajomych.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="profile-screen-vip" class="profile-subscreen hidden space-y-4">
-                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Powrót do profilu</span>
-                </button>
-                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
-                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Przywileje VIP</h3>
-                    <div class="space-y-2 text-xs">
-                        <div class="p-3 bg-gray-950 rounded-xl border border-cyan-500/30 flex items-center justify-between">
-                            <div>
-                                <span class="font-bold text-cyan-400 block">Poziom VIP 1</span>
-                                <span class="text-gray-400 text-[10px]">Niższe prowizje i priorytetowe wsparcie</span>
-                            </div>
-                            <span class="text-emerald-400 font-bold">Aktywny</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="profile-screen-settings" class="profile-subscreen hidden space-y-4">
-                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Powrót do profilu</span>
-                </button>
-                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
-                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Ustawienia Aplikacji</h3>
-                    <div class="space-y-3 text-xs">
-                        <div class="flex items-center justify-between p-2 bg-gray-950 rounded-xl">
-                            <span class="text-gray-300">Powiadomienia PUSH</span>
-                            <input type="checkbox" checked class="accent-purple-500 cursor-pointer">
-                        </div>
-                        <div class="flex items-center justify-between p-2 bg-gray-950 rounded-xl">
-                            <span class="text-gray-300">Tryb ciemny (OLED)</span>
-                            <input type="checkbox" checked class="accent-purple-500 cursor-pointer">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="content-search" class="main-content space-y-4 hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-3">
-                <h3 class="font-bold text-sm">Wyszukiwarka</h3>
-                <input type="text" placeholder="Szukaj wpisów lub użytkowników..." class="w-full bg-gray-950 border border-gray-800 rounded-lg p-2.5 text-sm focus:outline-none focus:border-purple-500">
-            </div>
-        </div>
-
-        <div id="content-notifications" class="main-content space-y-4 hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
-                <h3 class="font-bold text-purple-400 text-base mb-2">Powiadomienia</h3>
-                <p class="text-xs text-gray-300">Brak nowych powiadomień.</p>
-            </div>
-        </div>
-
-        <div id="content-comments" class="main-content space-y-4 hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 space-y-3">
-                <h3 class="font-bold text-sm">Komentarze</h3>
-                <textarea placeholder="Napisz komentarz..." class="w-full bg-gray-950 border border-gray-800 rounded-lg p-3 text-sm focus:outline-none focus:border-purple-500 resize-none h-20"></textarea>
-                <button class="bg-purple-600 text-white text-xs px-4 py-2 rounded-lg font-medium cursor-pointer">Wyślij</button>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center bg-gray-950 border-t border-gray-800 py-3">
-        <button onclick="switchMainTab('home', 'Sieć społeczna')" class="nav-btn text-purple-500 flex flex-col items-center cursor-pointer" data-target="home"><i class="fa-solid fa-house text-lg"></i><span class="text-[10px]">Home</span></button>
-        <button onclick="switchMainTab('gift', 'Bonusy')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="gift"><i class="fa-solid fa-gift text-lg"></i><span class="text-[10px]">Bonusy</span></button>
-        <button onclick="switchMainTab('crypto', 'Kryptowaluty')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="crypto"><i class="fa-brands fa-bitcoin text-lg"></i><span class="text-[10px]">Crypto</span></button>
-        <button onclick="switchMainTab('wallet', 'Portfel')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="wallet"><i class="fa-solid fa-wallet text-lg"></i><span class="text-[10px]">Portfel</span></button>
-        <button onclick="switchMainTab('profile', 'Profil')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="profile"><i class="fa-solid fa-user text-lg"></i><span class="text-[10px]">Profil</span></button>
-        <button onclick="switchMainTab('menu', 'Menu')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="menu"><i class="fa-solid fa-bars text-lg"></i><span class="text-[10px]">Menu</span></button>
-    </div>
-
-    <script>
-        function switchMainTab(tabId, title) {
-            const mainContents = document.querySelectorAll('.main-content');
-            mainContents.forEach(content => content.classList.add('hidden'));
-
-            const subtabsGroups = document.querySelectorAll('.subtabs-group');
-            subtabsGroups.forEach(group => group.classList.add('hidden'));
-
-            const targetContent = document.getElementById('content-' + tabId);
-            if (targetContent) targetContent.classList.remove('hidden');
-
-            const targetSubtabs = document.getElementById('subtabs-' + tabId);
-            if (targetSubtabs) targetSubtabs.classList.remove('hidden');
-
-            if (title) {
-                document.getElementById('header-title').innerText = title;
-            }
-
-            const navBtns = document.querySelectorAll('.nav-btn');
-            navBtns.forEach(btn => {
-                if (btn.getAttribute('data-target') === tabId) {
-                    btn.classList.add('text-purple-500');
-                    btn.classList.remove('text-gray-400');
-                } else {
-                    btn.classList.remove('text-purple-500');
-                    btn.classList.add('text-gray-400');
-                }
-            });
-        }
-
-        function switchSubTab(parentTab, subTabId, event) {
-            const subContents = document.querySelectorAll('.subcontent-' + parentTab);
-            subContents.forEach(content => content.classList.add('hidden'));
-
-            const targetSubContent = document.getElementById('subcontent-' + parentTab + '-' + subTabId);
-            if (targetSubContent) targetSubContent.classList.remove('hidden');
-
-            const subtabBtns = document.querySelectorAll('.subtab-btn-' + parentTab);
-            subtabBtns.forEach(btn => {
-                btn.classList.remove('border-purple-500', 'text-purple-500');
-                btn.classList.add('border-transparent', 'text-gray-400');
-            });
-
-            const currentBtn = event?.currentTarget;
-            if (currentBtn) {
-                currentBtn.classList.add('border-purple-500', 'text-purple-500');
-                currentBtn.classList.remove('border-transparent', 'text-gray-400');
-            }
-        }
-
-        function toggleLike(btn) {
-            const icon = btn.querySelector('i');
-            const span = btn.querySelector('span');
-            let count = parseInt(span.innerText);
-
-            if (icon.classList.contains('fa-regular')) {
-                icon.classList.remove('fa-regular');
-                icon.classList.add('fa-solid', 'text-purple-500');
-                span.innerText = count + 1;
-            } else {
-                icon.classList.remove('fa-solid', 'text-purple-500');
-                icon.classList.add('fa-regular');
-                span.innerText = count - 1;
-            }
-        }
-
-        function openProfileSubscreen(screenId) {
-            document.getElementById('profile-screen-main').classList.add('hidden');
-            const subscreen = document.getElementById('profile-screen-' + screenId);
-            if (subscreen) subscreen.classList.remove('hidden');
-        }
-
-        function closeProfileSubscreen() {
-            const subscreens = document.querySelectorAll('.profile-subscreen');
-            subscreens.forEach(s => s.classList.add('hidden'));
-            document.getElementById('profile-screen-main').classList.remove('hidden');
-        }
-
-        function saveNewPassword() {
-            const oldPass = document.getElementById('input-old-pass').value;
-            const newPass = document.getElementById('input-new-pass').value;
-
-            if (!oldPass || !newPass) {
-                alert('Proszę wypełnić oba pola hasła.');
-                return;
-            }
-
-            alert('Hasło zostało pomyślnie zaktualizowane!');
-            document.getElementById('input-old-pass').value = '';
-            document.getElementById('input-new-pass').value = '';
-            closeProfileSubscreen();
-        }
-    </script>
+    <nav class="fixed bottom-0 left-0 right-0 max-w-[720px] mx-auto z-30 px-3 pt-3 pb-[max(12px,env(safe-area-inset-bottom))] bg-[#0b0f1b]/95 backdrop-blur-xl border-t border-slate-800/80 flex justify-around"><button class="nav-btn active flex flex-col items-center" data-tab="pulpit" onclick="showTab('pulpit','Pulpit')"><i class="fa-solid fa-house"></i><span>Pulpit</span></button><button class="nav-btn flex flex-col items-center" data-tab="wallet" onclick="showTab('wallet','Portfel')"><i class="fa-solid fa-wallet"></i><span>Portfel</span></button><button class="nav-btn flex flex-col items-center" data-tab="exchange" onclick="showTab('exchange','Giełda')"><i class="fa-solid fa-chart-line"></i><span>Giełda</span></button><button class="nav-btn flex flex-col items-center" data-tab="earn" onclick="showTab('earn','Zarabiaj')"><i class="fa-solid fa-coins"></i><span>Zarabiaj</span></button><button class="nav-btn flex flex-col items-center" data-tab="activity" onclick="showTab('activity','Aktywność')"><i class="fa-solid fa-clock-rotate-left"></i><span>Historia</span></button></nav>
+  </main>
+  <div id="toast" class="hidden fixed top-5 left-1/2 -translate-x-1/2 z-50 rounded-xl bg-slate-800 border border-slate-700 px-4 py-3 text-xs shadow-2xl"></div>
+  <script>
+    class AssetRow extends HTMLElement { connectedCallback(){ this.innerHTML=`<div class="asset-row flex items-center gap-3 py-3"><span class="w-9 h-9 rounded-xl ${this.getAttribute('color')} flex items-center justify-center font-bold">${this.getAttribute('icon')}</span><div class="flex-1"><b class="text-sm">${this.getAttribute('name')}</b><p class="text-[10px] muted">${this.getAttribute('ticker')}</p></div><div class="text-right"><b class="text-sm">${this.getAttribute('value')}</b><p class="text-[10px] text-emerald-300">${this.getAttribute('change')}</p></div></div>`; }} customElements.define('asset-row',AssetRow);
+    class Activity extends HTMLElement { connectedCallback(){ this.innerHTML=`<div class="flex items-center gap-3 py-2"><span class="w-9 h-9 rounded-xl bg-slate-800 flex items-center justify-center ${this.getAttribute('color')}"><i class="fa-solid ${this.getAttribute('icon')}"></i></span><div class="flex-1"><b class="text-sm">${this.getAttribute('title')}</b><p class="text-[10px] muted">${this.getAttribute('date')}</p></div><b class="text-xs ${this.getAttribute('color')}">${this.getAttribute('amount')}</b></div>`; }} customElements.define('activity-row',Activity);
+    class Market extends HTMLElement { connectedCallback(){ this.innerHTML=`<div class="grid grid-cols-4 items-center py-3 border-t border-slate-800"><div class="col-span-1 flex items-center gap-2"><span class="w-8 h-8 rounded-lg ${this.getAttribute('color')} flex items-center justify-center text-xs font-bold">${this.getAttribute('icon')}</span><div><b class="text-xs">${this.getAttribute('name')}</b><p class="text-[10px] muted">${this.getAttribute('ticker')}</p></div></div><b class="text-xs text-right">${this.getAttribute('price')}</b><b class="text-xs text-right text-emerald-300">${this.getAttribute('change')}</b><button class="text-right text-violet-300 text-xs" onclick="toast('Para kupna zostanie otwarta po podłączeniu giełdy.')">Kup</button></div>`; }} customElements.define('market-row',Market);
+    function showTab(tab,title){ document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden')); document.getElementById('screen-'+tab)?.classList.remove('hidden'); document.getElementById('page-title').textContent=title; document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab)); document.querySelector('#tab-content'); window.scrollTo(0,0); }
+    function toast(message){ const el=document.getElementById('toast'); el.textContent=message; el.classList.remove('hidden'); clearTimeout(window.toastTimer); window.toastTimer=setTimeout(()=>el.classList.add('hidden'),2800); }
+  </script>
 </body>
 </html>
-```
-
-To jest poprawiona wersja w całości. Wklej to jako jeden plik `index.html` i zaktualizuj commit.
