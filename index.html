@@ -190,27 +190,93 @@
 
         <!-- WIDOKI GÓRNE (PROFIL, SZUKAJ, POWIADOMIENIA, KOMENTARZE) -->
           <div id="content-profile" class="main-content space-y-4 hidden">
-     <div id="profile-screen-main" class="space-y-4">
-        <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-5 text-center">
-            <div class="w-24 h-24 mx-auto rounded-full bg-purple-600 flex items-center justify-center text-3xl font-bold text-white border-4 border-purple-500/30">
-                <i class="fa-solid fa-user-astronaut"></i>
-            </div>
-            <h2 class="text-lg font-bold text-white">TechnixUser</h2>
-            <div class="grid grid-cols-3 gap-2 pt-2 border-t border-gray-800">
-                <div class="bg-gray-950 p-2 rounded-xl"><span class="block text-xs text-gray-400">Poziom</span><span class="text-sm font-bold text-purple-400">LVL 12</span></div>
-                <div class="bg-gray-950 p-2 rounded-xl"><span class="block text-xs text-gray-400">Punkty</span><span class="text-sm font-bold text-white">2,450 XP</span></div>
-                <div class="bg-gray-950 p-2 rounded-xl"><span class="block text-xs text-gray-400">Ranga</span><span class="text-sm font-bold text-purple-400">Pro</span></div>
+             <div id="profile-screen-main" class="space-y-4 pb-6">
+            <!-- Nagłówek Technix PRO -->
+            <div class="text-center space-y-2 pt-2">
+                <div class="relative w-20 h-20 mx-auto">
+                    <div class="w-full h-full rounded-2xl bg-gradient-to-tr from-purple-600 to-cyan-500 p-0.5 shadow-lg shadow-purple-500/20">
+                        <div class="w-full h-full bg-gray-950 rounded-[14px] flex items-center justify-center text-2xl font-bold text-cyan-400">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                    </div>
+                    <span class="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-2 border-gray-950 rounded-full flex items-center justify-center text-[10px] text-gray-950 font-bold" title="Online"><i class="fa-solid fa-check"></i></span>
+                </div>
+
+                <div class="flex items-center justify-center space-x-2 pt-1">
+                    <h2 class="text-lg font-bold text-white tracking-wide">TechnixUser</h2>
+                    <span class="px-1.5 py-0.5 text-[9px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded-md">PRO</span>
+                </div>
+                
+                <div class="flex items-center justify-center space-x-1.5 text-xs text-gray-400">
+                    <span class="font-mono text-gray-400">UID: #TX-2609-PRO</span>
+                    <i class="fa-regular fa-copy cursor-pointer hover:text-cyan-400 transition-colors"></i>
+                </div>
+
+                <!-- Unikalne Tagi Statusu -->
+                <div class="flex justify-center items-center gap-1.5 text-[10px] pt-1">
+                    <span class="px-2 py-0.5 rounded-full bg-gray-900 text-gray-300 border border-gray-800"><i class="fa-solid fa-shield-halved text-purple-400"></i> Encrypted</span>
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/60"><i class="fa-solid fa-bolt text-xs"></i> Level 12</span>
+                    <span class="px-2 py-0.5 rounded-full bg-cyan-950/60 text-cyan-400 border border-cyan-800/60"><i class="fa-solid fa-crown text-xs"></i> VIP Member</span>
+                </div>
             </div>
 
-                 <div class="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden text-sm">
-            <button onclick="openProfileSubscreen('security')" class="w-full px-4 py-3.5 flex items-center justify-between text-gray-300">
-                <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-shield-halved text-purple-400"></i>
-                    <span>Bezpieczeństwo i Hasło</span>
+            <!-- Unikalny Baner Programu Poleceń -->
+            <div class="bg-gradient-to-r from-purple-900/40 via-gray-900 to-gray-900 p-4 rounded-2xl border border-purple-500/30 flex items-center justify-between shadow-md">
+                <div class="space-y-0.5">
+                    <div class="flex items-center space-x-1.5">
+                        <span class="text-xs font-bold text-purple-300 uppercase tracking-wider">Technix Alliance</span>
+                    </div>
+                    <p class="text-xs font-semibold text-white">Zapraszaj i zgarniaj 35% prowizji</p>
+                    <p class="text-[10px] text-gray-400">Twój kod: <span class="text-cyan-400 font-mono">TECHNIX-2026</span></p>
                 </div>
-                <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
-            </button>
-                 </div>
+                <div class="w-10 h-10 rounded-xl bg-purple-600/20 border border-purple-500/40 flex items-center justify-center text-purple-300 text-lg shadow-inner">
+                    <i class="fa-solid fa-users-rays"></i>
+                </div>
+            </div>
+
+            <!-- Kategoria 1: Status i Poziom (Status & Power) -->
+            <div class="space-y-1.5">
+                <span class="text-[11px] text-gray-400 uppercase tracking-wider px-1 font-semibold">Status & Postęp</span>
+                <div class="bg-gray-900 rounded-2xl border border-gray-800/80 divide-y divide-gray-800/50 text-xs">
+                    <div class="p-3.5 flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-chart-line text-purple-400 w-4 text-center"></i>
+                            <span class="text-gray-200 font-medium">Poziom Konta & XP</span>
+                        </div>
+                        <span class="text-purple-400 font-bold font-mono">2,450 / 3,000 XP</span>
+                    </div>
+                    <div class="p-3.5 flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-gem text-cyan-400 w-4 text-center"></i>
+                            <span class="text-gray-200 font-medium">Przywileje VIP</span>
+                        </div>
+                        <span class="text-gray-400">Poziom 1 (Odblokowany)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kategoria 2: Bezpieczeństwo i System -->
+            <div class="space-y-1.5">
+                <span class="text-[11px] text-gray-400 uppercase tracking-wider px-1 font-semibold">Bezpieczeństwo & System</span>
+                <div class="bg-gray-900 rounded-2xl border border-gray-800/80 divide-y divide-gray-800/50 text-xs">
+                    <button onclick="openProfileSubscreen('security')" class="w-full p-3.5 flex items-center justify-between text-left cursor-pointer hover:bg-gray-850 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-lock text-emerald-400 w-4 text-center"></i>
+                            <span class="text-gray-200 font-medium">Ustawienia Bezpieczeństwa</span>
+                        </div>
+                        <span class="text-gray-400 flex items-center gap-1">Zmień hasło <i class="fa-solid fa-chevron-right text-[9px] text-gray-500"></i></span>
+                    </button>
+                    <div class="p-3.5 flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-sliders text-gray-400 w-4 text-center"></i>
+                            <span class="text-gray-200 font-medium">Ustawienia Aplikacji</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-[9px] text-gray-500"></i>
+                    </div>
+                </div>
+            </div>
+             </div>
+ 
               <div id="profile-screen-security" class="profile-subscreen hidden space-y-4">
                 <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
                     <i class="fa-solid fa-arrow-left"></i>
