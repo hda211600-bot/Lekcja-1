@@ -1,0 +1,103 @@
+/* Technix-Pro — pierwszy pakiet animacji
+   Plik przygotowany jako bezpieczna baza efektów wizualnych. */
+
+:root {
+  --tech-purple: rgba(168, 85, 247, 0.42);
+  --tech-cyan: rgba(34, 211, 238, 0.28);
+}
+
+/* Delikatne pojawianie się głównych kart */
+.main-content:not(.hidden),
+.subcontent-home:not(.hidden),
+.subcontent-gift:not(.hidden),
+.profile-subscreen:not(.hidden) {
+  animation: tech-fade-up 420ms ease both;
+}
+
+/* Karty unoszą się po najechaniu */
+.bg-gray-900,
+.bg-slate-900\/60 {
+  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+
+.bg-gray-900:hover,
+.bg-slate-900\/60:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px var(--tech-purple);
+}
+
+/* Przyciski reagują płynniej */
+button {
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease,
+    transform 180ms ease, filter 180ms ease;
+}
+
+button:hover {
+  filter: brightness(1.12);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+/* Delikatny puls statusu Online */
+.bg-green-500 {
+  animation: tech-online-pulse 2s ease-in-out infinite;
+}
+
+/* Obraz w sekcji Core Engine porusza się bardzo subtelnie */
+section img[src="procesor.png"] {
+  animation: tech-background-float 9s ease-in-out infinite;
+}
+
+/* Pasek aktywnej podzakładki */
+.subtab-btn-home,
+.subtab-btn-gift {
+  transition: color 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+
+.subtab-btn-home:hover,
+.subtab-btn-gift:hover {
+  transform: translateY(-1px);
+}
+
+@keyframes tech-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tech-online-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes tech-background-float {
+  0%, 100% {
+    transform: scale(1.05) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.08) translate3d(0, -6px, 0);
+  }
+}
+
+/* Szacunek dla ustawienia ograniczającego ruch */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
