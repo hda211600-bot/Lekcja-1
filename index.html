@@ -298,6 +298,103 @@
                         Zaktualizuj hasło
                     </button>
                 </div>
+                           <!-- Ekran 2: Program Poleceń (Referral Alliance) -->
+            <div id="profile-screen-referral" class="profile-subscreen hidden space-y-4">
+                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Powrót do profilu</span>
+                </button>
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2 flex items-center justify-between">
+                        <span>Technix Alliance</span>
+                        <span class="text-xs text-purple-400 font-mono">35% Prowizji</span>
+                    </h3>
+                    <div class="space-y-3 text-xs">
+                        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 space-y-1">
+                            <span class="text-gray-400 block">Twój unikalny link polecający:</span>
+                            <div class="flex items-center justify-between bg-gray-900 p-2 rounded-lg font-mono text-cyan-400">
+                                <span>https://technix-pro.app/ref/TECHNIX-2026</span>
+                                <i class="fa-regular fa-copy cursor-pointer hover:text-white" onclick="alert('Skopiowano link polecający!')"></i>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-center pt-2">
+                            <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+                                <span class="block text-gray-400 text-[10px]">Zaproszeni użytkownicy</span>
+                                <span class="text-base font-bold text-white">0</span>
+                            </div>
+                            <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+                                <span class="block text-gray-400 text-[10px]">Zarobek ogółem</span>
+                                <span class="text-base font-bold text-emerald-400">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ekran 3: Poziom i XP (Status & Power) -->
+            <div id="profile-screen-status" class="profile-subscreen hidden space-y-4">
+                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Powrót do profilu</span>
+                </button>
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Status & Postęp XP</h3>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-400">Poziom 12 (Cyber Architect)</span>
+                                <span class="text-purple-400 font-bold">2,450 / 3,000 XP</span>
+                            </div>
+                            <div class="w-full bg-gray-950 h-3 rounded-full overflow-hidden border border-gray-800">
+                                <div class="bg-gradient-to-r from-purple-600 to-cyan-400 h-full rounded-full" style="width: 81%;"></div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-[11px] pt-2">Zdobywaj XP za aktywność w aplikacji, udział w ankietach i zapraszanie znajomych.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ekran 4: Przywileje VIP -->
+            <div id="profile-screen-vip" class="profile-subscreen hidden space-y-4">
+                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Powrót do profilu</span>
+                </button>
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Przywileje VIP</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="p-3 bg-gray-950 rounded-xl border border-cyan-500/30 flex items-center justify-between">
+                            <div>
+                                <span class="font-bold text-cyan-400 block">Poziom VIP 1</span>
+                                <span class="text-gray-400 text-[10px]">Niższe prowizje i priorytetowe wsparcie</span>
+                            </div>
+                            <span class="text-emerald-400 font-bold">Aktywny</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ekran 5: Ustawienia Aplikacji -->
+            <div id="profile-screen-settings" class="profile-subscreen hidden space-y-4">
+                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Powrót do profilu</span>
+                </button>
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Ustawienia Aplikacji</h3>
+                    <div class="space-y-3 text-xs">
+                        <div class="flex items-center justify-between p-2 bg-gray-950 rounded-xl">
+                            <span class="text-gray-300">Powiadomienia PUSH</span>
+                            <input type="checkbox" checked class="accent-purple-500 cursor-pointer">
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-gray-950 rounded-xl">
+                            <span class="text-gray-300">Tryb ciemny (OLED)</span>
+                            <input type="checkbox" checked class="accent-purple-500 cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+               
               </div>
          
         </div>
