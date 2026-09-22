@@ -1,5 +1,4 @@
-/* Technix-Pro — pierwszy pakiet animacji
-   Plik przygotowany jako bezpieczna baza efektów wizualnych. */
+/* Technix-Pro — pakiet animacji widocznych również na telefonach. */
 
 :root {
   --tech-purple: rgba(168, 85, 247, 0.42);
@@ -61,10 +60,41 @@ section img[src="procesor.png"] {
   transform: translateY(-1px);
 }
 
+/* Telefony nie mają klasycznego hovera, dlatego animacje uruchamiają się
+   automatycznie po wyświetleniu kart oraz przy dotknięciu elementu. */
+@media (hover: none), (max-width: 640px) {
+  .bg-gray-900,
+  .bg-slate-900\/60 {
+    animation: tech-mobile-card-in 560ms ease both;
+  }
+
+  .bg-gray-900:active,
+  .bg-slate-900\/60:active,
+  button:active {
+    transform: scale(0.98);
+    box-shadow: 0 6px 22px var(--tech-purple);
+  }
+
+  section img[src="procesor.png"] {
+    animation-duration: 7s;
+  }
+}
+
 @keyframes tech-fade-up {
   from {
     opacity: 0;
     transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tech-mobile-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
