@@ -11,6 +11,7 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -38,15 +39,15 @@
     </div>
 
     <div id="subtabs-home" class="subtabs-group flex justify-around border-b border-gray-800 text-sm font-medium flex-shrink-0 bg-black z-10">
-        <button onclick="switchSubTab('home', 'kanal')" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-purple-500 text-purple-500">Kanał</button>
-        <button onclick="switchSubTab('home', 'grupa')" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Grupa</button>
-        <button onclick="switchSubTab('home', 'info')" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Info</button>
+        <button onclick="switchSubTab('home', 'kanal', event)" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-purple-500 text-purple-500">Kanał</button>
+        <button onclick="switchSubTab('home', 'grupa', event)" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Grupa</button>
+        <button onclick="switchSubTab('home', 'info', event)" class="subtab-btn-home py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Info</button>
     </div>
 
     <div id="subtabs-gift" class="subtabs-group hidden flex justify-around border-b border-gray-800 text-sm font-medium flex-shrink-0 bg-black z-10">
-        <button onclick="switchSubTab('gift', 'promocje')" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-purple-500 text-purple-500">Promocje</button>
-        <button onclick="switchSubTab('gift', 'nagrody')" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Nagrody</button>
-        <button onclick="switchSubTab('gift', 'zadania')" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Zadania</button>
+        <button onclick="switchSubTab('gift', 'promocje', event)" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-purple-500 text-purple-500">Promocje</button>
+        <button onclick="switchSubTab('gift', 'nagrody', event)" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Nagrody</button>
+        <button onclick="switchSubTab('gift', 'zadania', event)" class="subtab-btn-gift py-2 px-4 cursor-pointer border-b-2 border-transparent text-gray-400">Zadania</button>
     </div>
 
     <div id="tab-content" class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 pb-24">
@@ -129,13 +130,13 @@
 
             <section class="relative bg-slate-950 py-24 px-6 overflow-hidden min-h-[600px] flex items-center justify-center">
                 <div class="absolute inset-0 z-0">
-                    <img src="procesor.png" alt="Core Engine Background" class="w-full h-full object-cover object-center opacity-40 mix-blend-luminosity scale-105 transform hover:scale-100 transition-transform duration-1000" />
+                    <img src="procesor.png" alt="Core Engine Background" class="w-full h-full object-cover object-center opacity-40 mix-blend-luminosity scale-105 transform hover:scale-100 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950"></div>
                     <div class="absolute inset-0 bg-radial-glow opacity-60"></div>
                 </div>
 
                 <div class="relative z-10 max-w-5xl mx-auto text-center space-y-8">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 backdrop-blur-md text-cyan-400 text-sm font-semibold tracking-wider uppercase shadow-[0_0_15px_rgba(6,182,212,0.25)]">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 backdrop-blur-md text-cyan-400 text-sm font-semibold tracking-wider uppercase">
                         <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
                         Core Engine Architecture
                     </div>
@@ -443,9 +444,9 @@
 
     <div class="fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center bg-gray-950 border-t border-gray-800 py-3">
         <button onclick="switchMainTab('home', 'Sieć społeczna')" class="nav-btn text-purple-500 flex flex-col items-center cursor-pointer" data-target="home"><i class="fa-solid fa-house text-lg"></i><span class="text-[10px]">Home</span></button>
-        <button onclick="switchMainTab('gift', 'Bonusy')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="gift"><i class="fa-solid fa-gift text-lg"></i><span class="text-[10px]">Bonus</span></button>
+        <button onclick="switchMainTab('gift', 'Bonusy')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="gift"><i class="fa-solid fa-gift text-lg"></i><span class="text-[10px]">Bonusy</span></button>
         <button onclick="switchMainTab('crypto', 'Kryptowaluty')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="crypto"><i class="fa-brands fa-bitcoin text-lg"></i><span class="text-[10px]">Crypto</span></button>
-        <button onclick="switchMainTab('wallet', 'Portfel')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="wallet"><i class="fa-solid fa-wallet text-lg"></i><span class="text-[10px]">Wallet</span></button>
+        <button onclick="switchMainTab('wallet', 'Portfel')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="wallet"><i class="fa-solid fa-wallet text-lg"></i><span class="text-[10px]">Portfel</span></button>
         <button onclick="switchMainTab('profile', 'Profil')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="profile"><i class="fa-solid fa-user text-lg"></i><span class="text-[10px]">Profil</span></button>
         <button onclick="switchMainTab('menu', 'Menu')" class="nav-btn text-gray-400 hover:text-purple-400 flex flex-col items-center cursor-pointer" data-target="menu"><i class="fa-solid fa-bars text-lg"></i><span class="text-[10px]">Menu</span></button>
     </div>
@@ -480,7 +481,7 @@
             });
         }
 
-        function switchSubTab(parentTab, subTabId) {
+        function switchSubTab(parentTab, subTabId, event) {
             const subContents = document.querySelectorAll('.subcontent-' + parentTab);
             subContents.forEach(content => content.classList.add('hidden'));
 
@@ -493,7 +494,7 @@
                 btn.classList.add('border-transparent', 'text-gray-400');
             });
 
-            const currentBtn = event.currentTarget;
+            const currentBtn = event?.currentTarget;
             if (currentBtn) {
                 currentBtn.classList.add('border-purple-500', 'text-purple-500');
                 currentBtn.classList.remove('border-transparent', 'text-gray-400');
@@ -545,3 +546,6 @@
     </script>
 </body>
 </html>
+```
+
+To jest poprawiona wersja w całości. Wklej to jako jeden plik `index.html` i zaktualizuj commit.
