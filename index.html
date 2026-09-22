@@ -1,4 +1,4 @@
-button             <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -6,62 +6,139 @@ button             <!DOCTYPE html>
     <title>Technix-Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>.no-scrollbar::-webkit-scrollbar{display:none;}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}</style>
 </head>
-<body class="bg-black text-white font-sans h-screen flex flex-col justify-between overflow-hidden">
+<body class="bg-black text-white font-sans flex flex-col h-[100dvh] overflow-hidden relative">
 
     <!-- NAGŁÓWEK -->
-    <div class="flex items-center justify-between p-4 bg-gray-950 border-b border-gray-800">
-        <button onclick="switchTab('profile')" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center font-bold text-xs border border-purple-400">T</button>
-        <span id="header-title" class="font-bold text-base">Technix-Pro</span>
-        <i class="fa-solid fa-bell text-gray-400"></i>
+    <div class="flex items-center justify-between px-4 py-3 bg-black border-b border-gray-800 flex-shrink-0 z-10">
+        <div class="flex items-center space-x-3">
+            <button onclick="switchTab('profile', 'Logo TECHNIXPRO')" class="w-9 h-9 rounded-full bg-purple-600 flex items-center justify-center font-bold border border-purple-400 overflow-hidden">
+                <img id="header-avatar-img" src="https://api.dicebear.com/7.x/bottts/svg?seed=TechnixPro" class="w-full h-full object-cover">
+            </button>
+            <span id="header-title" class="text-lg font-semibold">Sieć społeczna</span>
+        </div>
+        <div class="flex items-center space-x-4 text-lg text-gray-400">
+            <i class="fa-solid fa-magnifying-glass" onclick="switchTab('search', 'Szukaj')"></i>
+            <i class="fa-solid fa-bell" onclick="switchTab('notifications', 'Powiadomienia')"></i>
+        </div>
+    </div>
+
+    <!-- SUBTABY -->
+    <div id="subtabs-home" class="subtabs-group flex justify-around border-b border-gray-800 text-sm font-medium flex-shrink-0 bg-black">
+        <button class="py-2 px-4 text-purple-500 border-b-2 border-purple-500">Kanał</button>
+        <button class="py-2 px-4 text-gray-400">Grupa</button>
+        <button class="py-2 px-4 text-gray-400">Info</button>
     </div>
 
     <!-- ZAWARTOŚĆ -->
-    <div class="flex-1 overflow-y-auto p-4 space-y-4">
-        <div id="tab-home" class="tab-content">
+    <div class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-4 pb-24">
+        
+        <!-- DOM -->
+        <div id="tab-home" class="tab-content space-y-3">
             <div class="bg-gray-900 p-4 rounded-xl border border-gray-800">
-                <h3 class="font-bold text-purple-400 text-sm mb-1">Sieć Społeczna</h3>
-                <p class="text-xs text-gray-300">Strona działa poprawnie!</p>
+                <div class="flex items-center space-x-2 text-xs text-green-400 mb-2"><span class="w-2 h-2 rounded-full bg-green-500"></span>Status: Online (v2.4)</div>
+                <h4 class="font-bold text-sm">Technix-Pro!</h4>
+                <p class="text-xs text-gray-300 mt-1">🚀 Witamy w oficjalnej aplikacji Technix-Pro.</p>
             </div>
         </div>
-        <div id="tab-gift" class="tab-content hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
-                <h3 class="font-bold text-purple-400 text-sm">Strefa Bonusów</h3>
-            </div>
+
+        <!-- BONUSY -->
+        <div id="tab-gift" class="tab-content hidden space-y-3">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center"><h3 class="font-bold text-purple-400">Strefa Bonusów</h3><p class="text-xs text-gray-400 mt-1">Promocje, Nagrody i Zadania</p></div>
         </div>
-        <div id="tab-crypto" class="tab-content hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
-                <h3 class="font-bold text-purple-400 text-sm">Kryptowaluty</h3>
-            </div>
+
+        <!-- CRYPTO -->
+        <div id="tab-crypto" class="tab-content hidden space-y-3">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center"><h3 class="font-bold text-purple-400">Kryptowaluty</h3></div>
         </div>
-        <div id="tab-wallet" class="tab-content hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
-                <h3 class="font-bold text-purple-400 text-sm">Portfel</h3>
-            </div>
+
+        <!-- PORTFEL -->
+        <div id="tab-wallet" class="tab-content hidden space-y-3">
+            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center"><h3 class="font-bold text-purple-400">Portfel</h3></div>
         </div>
-        <div id="tab-profile" class="tab-content hidden">
-            <div class="bg-gray-900 p-5 rounded-xl border border-gray-800 text-center space-y-3">
-                <div class="w-16 h-16 bg-purple-600 rounded-full mx-auto flex items-center justify-center text-xl font-bold border-2 border-purple-400">T</div>
-                <h2 class="text-base font-bold">TechnixUser</h2>
+
+        <!-- PROFIL -->
+        <div id="tab-profile" class="tab-content hidden space-y-4">
+            <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800 flex justify-between items-center px-4">
+                <span class="w-5"></span><h2 class="text-xs font-bold text-purple-400 uppercase">Profil Użytkownika</h2>
+                <i class="fa-solid fa-gear text-gray-400 cursor-pointer" onclick="openModal('settings-modal')"></i>
             </div>
+            <div class="bg-gray-900 p-5 rounded-xl border border-gray-800 flex flex-col items-center space-y-3 text-center">
+                <div class="w-20 h-20 rounded-full border-2 border-purple-500 overflow-hidden bg-gray-950 p-1">
+                    <img id="main-profile-avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=TechnixPro" class="w-full h-full object-cover rounded-full">
+                </div>
+                <button onclick="openAvatarModal()" class="bg-purple-600/30 border border-purple-500/50 text-purple-300 text-xs px-3 py-1 rounded-lg">Zmień Avatar</button>
+                <h2 id="profile-display-name" class="text-lg font-bold">TechnixUser</h2>
+                <div class="grid grid-cols-2 gap-2 w-full pt-1">
+                    <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800"><span class="text-[10px] text-gray-400 block">Punkty PRO</span><span id="points-val" class="font-bold text-purple-400 text-sm">1,250</span></div>
+                    <div class="bg-gray-950 p-2.5 rounded-lg border border-gray-800"><span class="text-[10px] text-gray-400 block">Status</span><span class="font-bold text-green-400 text-xs">PRO VIP</span></div>
+                </div>
+            </div>
+            <button onclick="openModal('settings-modal')" class="w-full bg-gray-900 border border-gray-800 text-gray-300 p-3 rounded-xl text-xs flex justify-between items-center">
+                <span>Ustawienia i Bezpieczeństwo</span><i class="fa-solid fa-chevron-right text-gray-500"></i>
+            </button>
         </div>
+
+        <div id="tab-search" class="tab-content hidden"><div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-sm">Wyszukiwarka</div></div>
+        <div id="tab-notifications" class="tab-content hidden"><div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-sm text-center">Brak powiadomień</div></div>
     </div>
 
     <!-- DOLNY PASEK -->
-    <div class="bg-gray-950 border-t border-gray-800 py-3 flex justify-around items-center">
-        <button onclick="switchTab('home')" class="nav-btn text-purple-500 text-xl"><i class="fa-solid fa-house"></i></button>
-        <button onclick="switchTab('gift')" class="nav-btn text-gray-400 text-xl"><i class="fa-solid fa-gift"></i></button>
-        <button onclick="switchTab('crypto')" class="nav-btn text-gray-400 text-xl"><i class="fa-brands fa-bitcoin"></i></button>
-        <button onclick="switchTab('wallet')" class="nav-btn text-gray-400 text-xl"><i class="fa-solid fa-wallet"></i></button>
-        <button onclick="switchTab('profile')" class="nav-btn text-gray-400 text-xl"><i class="fa-solid fa-user"></i></button>
+    <div class="fixed bottom-0 left-0 right-0 z-40 flex justify-around items-center bg-gray-950 border-t border-gray-800 py-3">
+        <button onclick="switchTab('home', 'Sieć społeczna')" class="nav-btn text-purple-500 text-lg" data-target="home"><i class="fa-solid fa-house"></i></button>
+        <button onclick="switchTab('gift', 'Bonusy')" class="nav-btn text-gray-400 text-lg" data-target="gift"><i class="fa-solid fa-gift"></i></button>
+        <button onclick="switchTab('crypto', 'Kryptowaluty')" class="nav-btn text-gray-400 text-lg" data-target="crypto"><i class="fa-brands fa-bitcoin"></i></button>
+        <button onclick="switchTab('wallet', 'Portfel')" class="nav-btn text-gray-400 text-lg" data-target="wallet"><i class="fa-solid fa-wallet"></i></button>
+        <button onclick="switchTab('profile', 'Logo TECHNIXPRO')" class="nav-btn text-gray-400 text-lg" data-target="profile"><i class="fa-solid fa-user"></i></button>
+    </div>
+
+    <!-- MODAL USTAWIEŃ -->
+    <div id="settings-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4 w-full max-w-xs space-y-3">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-2"><h3 class="font-bold text-sm text-purple-400">Ustawienia</h3><i class="fa-solid fa-xmark text-gray-400 cursor-pointer" onclick="closeModal('settings-modal')"></i></div>
+            <div><label class="text-[10px] text-gray-400">Nazwa użytkownika</label><input id="input-username" type="text" value="TechnixUser" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-xs text-white"></div>
+            <div class="flex justify-between items-center p-2 bg-gray-950 rounded border border-gray-800 text-xs"><span>Ukryj Punkty PRO</span><input type="checkbox" onchange="document.getElementById('points-val').textContent = this.checked ? '****' : '1,250'"></div>
+            <button onclick="saveSettings()" class="w-full bg-purple-600 text-white text-xs py-2 rounded font-medium">Zapisz</button>
+        </div>
+    </div>
+
+    <!-- MODAL AVATARA -->
+    <div id="avatar-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4 w-full max-w-xs space-y-3 text-center">
+            <h3 class="font-bold text-sm text-purple-400">Wybierz avatar</h3>
+            <div id="avatar-grid" class="grid grid-cols-5 gap-2"></div>
+            <div class="flex space-x-2 pt-2"><button onclick="closeModal('avatar-modal')" class="flex-1 bg-gray-800 text-gray-300 text-xs py-2 rounded">Anuluj</button><button onclick="saveAvatar()" class="flex-1 bg-purple-600 text-white text-xs py-2 rounded">Zapisz</button></div>
+        </div>
     </div>
 
     <script>
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            const target = document.getElementById('tab-' + tabId);
-            if (target) target.classList.remove('hidden');
+        const avatars=['TechnixPro','Alpha','Cyber','Neon','Viper','Matrix','Quantum','Nexus','Titan','Apex'];
+        let currentAv='https://api.dicebear.com/7.x/bottts/svg?seed=TechnixPro', selectedAv=currentAv;
+        
+        function switchTab(id, title){
+            document.querySelectorAll('.tab-content').forEach(e=>e.classList.add('hidden'));
+            document.getElementById('tab-'+id).classList.remove('hidden');
+            if(title) document.getElementById('header-title').textContent=title;
+            document.getElementById('subtabs-home').classList.toggle('hidden', id!=='home');
+            document.querySelectorAll('.nav-btn').forEach(b=>{
+                b.classList.replace('text-purple-500','text-gray-400');
+                if(b.getAttribute('data-target')===id) b.classList.replace('text-gray-400','text-purple-500');
+            });
         }
+        function openModal(id){ document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id){ document.getElementById(id).classList.add('hidden'); }
+        function openAvatarModal(){
+            const g=document.getElementById('avatar-grid'); g.innerHTML='';
+            avatars.forEach(s=>{
+                const url=`https://api.dicebear.com/7.x/bottts/svg?seed=${s}`;
+                g.innerHTML+=`<div onclick="selectedAv='${url}'" class="w-10 h-10 rounded-full border border-gray-700 bg-gray-950 p-0.5"><img src="${url}" class="w-full h-full rounded-full"></div>`;
+            });
+            openModal('avatar-modal');
+        }
+        function saveAvatar(){ currentAv=selectedAv; document.getElementById('main-profile-avatar').src=currentAv; document.getElementById('header-avatar-img').src=currentAv; closeModal('avatar-modal'); }
+        function saveSettings(){ const n=document.getElementById('input-username').value; if(n.trim()) document.getElementById('profile-display-name').textContent=n; closeModal('settings-modal'); }
     </script>
 </body>
-</html>
+    </html>
+    
