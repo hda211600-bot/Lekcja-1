@@ -189,11 +189,54 @@
         </div>
 
         <!-- WIDOKI GÓRNE (PROFIL, SZUKAJ, POWIADOMIENIA, KOMENTARZE) -->
-        <div id="content-profile" class="main-content space-y-4 hidden">
-            <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-center">
-                <h3 class="font-bold text-purple-400 text-base mb-2">Profil Użytkownika</h3>
-                <p class="text-xs text-gray-300">Zarządzaj swoimi danymi.</p>
+          <div id="content-profile" class="main-content space-y-4 hidden">
+     <div id="profile-screen-main" class="space-y-4">
+        <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-5 text-center">
+            <div class="w-24 h-24 mx-auto rounded-full bg-purple-600 flex items-center justify-center text-3xl font-bold text-white border-4 border-purple-500/30">
+                <i class="fa-solid fa-user-astronaut"></i>
             </div>
+            <h2 class="text-lg font-bold text-white">TechnixUser</h2>
+            <div class="grid grid-cols-3 gap-2 pt-2 border-t border-gray-800">
+                <div class="bg-gray-950 p-2 rounded-xl"><span class="block text-xs text-gray-400">Poziom</span><span class="text-sm font-bold text-purple-400">LVL 12</span></div>
+                <div class="bg-gray-950 p-2 rounded-xl"><span class="block text-xs text-gray-400">Punkty</span><span class="text-sm font-bold text-white">2,450 XP</span></div>
+                <div class="bg-gray-950 p-2 rounded-xl"><span class="block text-xs text-gray-400">Ranga</span><span class="text-sm font-bold text-purple-400">Pro</span></div>
+            </div>
+
+                 <div class="bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden text-sm">
+            <button onclick="openProfileSubscreen('security')" class="w-full px-4 py-3.5 flex items-center justify-between text-gray-300">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-shield-halved text-purple-400"></i>
+                    <span>Bezpieczeństwo i Hasło</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-500"></i>
+            </button>
+                 </div>
+              <div id="profile-screen-security" class="profile-subscreen hidden space-y-4">
+                <button onclick="closeProfileSubscreen()" class="flex items-center space-x-2 text-xs text-purple-400 mb-2 cursor-pointer">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Powrót do profilu</span>
+                </button>
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 space-y-4">
+                    <h3 class="font-bold text-white text-base border-b border-gray-800 pb-2">Zmiana hasła</h3>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block text-gray-400 mb-1">Obecne hasło</label>
+                            <input type="password" id="input-old-pass" placeholder="••••••••" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-1">Nowe hasło</label>
+                            <input type="password" id="input-new-pass" placeholder="••••••••" class="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                    </div>
+                    <button onclick="saveNewPassword()" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs rounded-xl cursor-pointer">
+                        Zaktualizuj hasło
+                    </button>
+                </div>
+              </div>
+         
+        </div>
+            </div>
+     
         </div>
 
         <div id="content-search" class="main-content space-y-4 hidden">
@@ -292,6 +335,33 @@
                 span.innerText = count - 1;
             }
         }
+             function openProfileSubscreen(screenId) {
+            document.getElementById('profile-screen-main').classList.add('hidden');
+            const subscreen = document.getElementById('profile-screen-' + screenId);
+            if (subscreen) subscreen.classList.remove('hidden');
+        }
+
+        function closeProfileSubscreen() {
+            const subscreens = document.querySelectorAll('.profile-subscreen');
+            subscreens.forEach(s => s.classList.add('hidden'));
+            document.getElementById('profile-screen-main').classList.remove('hidden');
+        }
+
+        function saveNewPassword() {
+            const oldPass = document.getElementById('input-old-pass').value;
+            const newPass = document.getElementById('input-new-pass').value;
+
+            if (!oldPass || !newPass) {
+                alert('Proszę wypełnić oba pola hasła.');
+                return;
+            }
+
+            alert('Hasło zostało pomyślnie zaktualizowane!');
+            document.getElementById('input-old-pass').value = '';
+            document.getElementById('input-new-pass').value = '';
+            closeProfileSubscreen();
+        }
+
     </script>
 </body>
 </html>
